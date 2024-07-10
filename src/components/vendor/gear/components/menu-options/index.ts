@@ -1,2 +1,2 @@
-export { MenuOptions } from './MenuOptions';
-export type { ClassNameProps as MenuOptionsClassNameProps } from './MenuOptions';
+export { MenuOptions } from './menu-options';
+export type { ClassNameProps as MenuOptionsClassNameProps } from './menu-options';

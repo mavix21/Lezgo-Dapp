@@ -1,0 +1,30 @@
+.container {
+  height: 100%;
+  padding: 20px 0;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
+
+.walletBalance {
+  color: #fff;
+}
+
+.menuIcon {
+  & svg path {
+    fill: #000000;
+    stroke: #000000;
+  }
+}
+
+.vara-logo {
+  margin-right: 22px;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}

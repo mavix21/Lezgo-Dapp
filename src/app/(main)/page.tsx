@@ -1,7 +1,7 @@
 import { Header } from '@/components/layout/header/Header';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
-import { Hero } from '@/components/Hero';
+import { Hero } from '@/components/layout/Hero';
 
 export default function HomePage() {
   return (

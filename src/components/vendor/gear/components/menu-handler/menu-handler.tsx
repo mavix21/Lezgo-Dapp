@@ -1,6 +1,21 @@
-import { MenuOptionsClassNameProps } from '@/components/ui/vendor/gear/components/menu-options';
-import { MobileMenuClassNameProps } from '@/components/ui/vendor/gear/components/mobile-menu';
-import React from 'react';
+import { motion } from 'framer-motion';
+import { MenuOptions, MenuOptionsClassNameProps } from '../menu-options';
+import { MobileMenu, MobileMenuClassNameProps } from '../mobile-menu';
+import BurgerMenuSVG from './assets/burger-menu.svg';
+import CrossSVG from '../../assets/cross-icon.svg';
+import {
+  Wallet,
+  WalletClassNameProps,
+} from '../../features/wallet/components/wallet';
+import React, { useRef, useState } from 'react';
+import { useAccount } from '@gear-js/react-hooks';
+import {
+  useClickOutside,
+  useRootModalRef,
+} from '@/components/vendor/gear/utils';
+import { clsx } from 'clsx';
+import styles from './menu-handler.module.css';
+import { Button } from '@gear-js/vara-ui';
 
 type Props = {
   customItems?: {
@@ -19,6 +34,100 @@ type Props = {
   };
 };
 
-export function MenuHandler() {
-  return <></>;
+export function MenuHandler({ customItems, className }: Props) {
+  const menuRef = useRef<HTMLDivElement>(null);
+  const { account } = useAccount();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
+
+  const openMenu = () => setIsMenuOpen(true);
+  const closeMenu = () => setIsMenuOpen(false);
+
+  /**
+   * Why we need modal root here:
+   * useClickOutside closes the menu when clicked "outside the menu".
+   * The modal is mounted in a portal, so it's "outside the menu", causing the menu to close when modal clicked.
+   * After the menu is closed, the modal disappears as well because the <EzSignlessTransactions /> component,
+   * which encapsulates the portal modal component, is unmounted from the menu.
+   */
+  const modalRootRef = useRootModalRef();
+
+  useClickOutside(
+    () => {
+      closeMenu();
+    },
+    menuRef,
+    modalRootRef,
+  );
+
+  return (
+    <div className={clsx(styles.container, className?.container)} ref={menuRef}>
+      <p>MenuHandler</p>
+      <div>
+        <Wallet
+          isWalletModalOpen={isWalletModalOpen}
+          walletModalHandler={setIsWalletModalOpen}
+          className={className?.wallet}
+        />
+      </div>
+
+      {/*{account && (*/}
+      {/*  <>*/}
+      {/*    <div className={styles.contextMenuWrapper}>*/}
+      {/*      <Button*/}
+      {/*        color="transparent"*/}
+      {/*        icon={*/}
+      {/*          isMenuOpen*/}
+      {/*            ? () => <CrossSVG className={styles.burger} />*/}
+      {/*            : () => <BurgerMenuSVG className={styles.burger} />*/}
+      {/*        }*/}
+      {/*        className={clsx(className?.icon)}*/}
+      {/*        onClick={isMenuOpen ? closeMenu : openMenu}*/}
+      {/*      />*/}
+      {/*      {isMenuOpen && (*/}
+      {/*        <motion.div*/}
+      {/*          className={clsx(styles.dropdownContainer, className?.dropdown)}*/}
+      {/*          initial={{ opacity: 0 }}*/}
+      {/*          animate={{ opacity: 1 }}*/}
+      {/*        >*/}
+      {/*          <div className={styles.dropdownHeader}>*/}
+      {/*            <Button*/}
+      {/*              color="transparent"*/}
+      {/*              icon={CrossSVG}*/}
+      {/*              className={styles.closeIcon}*/}
+      {/*              onClick={closeMenu}*/}
+      {/*            />*/}
+      {/*          </div>*/}
+      {/*          <MenuOptions*/}
+      {/*            className={className?.menuOptions}*/}
+      {/*            customItems={customItems}*/}
+      {/*            onClose={closeMenu}*/}
+      {/*          />*/}
+      {/*        </motion.div>*/}
+      {/*      )}*/}
+      {/*    </div>*/}
+      {/*    {isMenuOpen && (*/}
+      {/*      <div*/}
+      {/*        className={clsx(*/}
+      {/*          styles.mobileWrapper,*/}
+      {/*          className?.mobileMenuWrapper,*/}
+      {/*        )}*/}
+      {/*      >*/}
+      {/*        <MobileMenu*/}
+      {/*          className={className?.mobileMenu}*/}
+      {/*          onClose={closeMenu}*/}
+      {/*          walletModalHandler={setIsWalletModalOpen}*/}
+      {/*        >*/}
+      {/*          <MenuOptions*/}
+      {/*            customItems={customItems}*/}
+      {/*            className={className?.menuOptions}*/}
+      {/*            onClose={closeMenu}*/}
+      {/*          />*/}
+      {/*        </MobileMenu>*/}
+      {/*      </div>*/}
+      {/*    )}*/}
+      {/*  </>*/}
+      {/*)}*/}
+    </div>
+  );
 }

@@ -1,25 +1,32 @@
-import enkryptIcon from '@/components/ui/vendor/features/wallet/assets/enkrypt.svg';
-import polkadotIcon from '@/components/ui/vendor/features/wallet/assets/polkadot.svg';
-import subwalletIcon from '@/components/ui/vendor/features/wallet/assets/subwallet.svg';
-import talismanIcon from '@/components/ui/vendor/features/wallet/assets/talisman.svg';
-import novaIcon from '@/components/ui/vendor/features/wallet/assets/nova.svg';
+import EncryptSVG from './assets/enkrypt.svg';
+import PolkadotSVG from './assets/polkadot.svg';
+import SubwalletSVG from './assets/subwallet.svg';
+import TalismanSVG from './assets/talisman.svg';
+import NovaSVG from './assets/nova.svg';
 import { Wallets } from './types';
 
-// @ts-ignore
-const isNovaWallet = !!window?.walletExtension?.isNovaWallet;
+// const isNovaWallet = !!window?.walletExtension?.isNovaWallet;
 
-const WALLET = isNovaWallet
-  ? {
-      'polkadot-js': { name: 'Nova Wallet', SVG: novaIcon },
-      'subwallet-js': { name: 'SubWallet', SVG: subwalletIcon },
-    }
-  : {
-      'polkadot-js': { name: 'Polkadot JS', SVG: polkadotIcon },
-      'subwallet-js': { name: 'SubWallet', SVG: subwalletIcon },
-      talisman: { name: 'Talisman', SVG: talismanIcon },
-      enkrypt: { name: 'Enkrypt', SVG: enkryptIcon },
-    };
+// const WALLET = isNovaWallet
+//   ? {
+//       'polkadot-js': { name: 'Nova Wallet', SVG: NovaSVG },
+//       'subwallet-js': { name: 'SubWallet', SVG: SubwalletSVG },
+//     }
+//   : {
+//       'polkadot-js': { name: 'Polkadot JS', SVG: PolkadotSVG },
+//       'subwallet-js': { name: 'SubWallet', SVG: SubwalletSVG },
+//       talisman: { name: 'Talisman', SVG: TalismanSVG },
+//       enkrypt: { name: 'Enkrypt', SVG: EncryptSVG },
+//     };
+//
+
+const WALLET = {
+  'polkadot-js': { name: 'Polkadot JS', SVG: PolkadotSVG },
+  'subwallet-js': { name: 'SubWallet', SVG: SubwalletSVG },
+  talisman: { name: 'Talisman', SVG: TalismanSVG },
+  enkrypt: { name: 'Enkrypt', SVG: EncryptSVG },
+};
 
 const WALLETS = Object.entries(WALLET) as Wallets;
 
-export { WALLET, WALLETS, isNovaWallet };
+export { WALLET, WALLETS };
