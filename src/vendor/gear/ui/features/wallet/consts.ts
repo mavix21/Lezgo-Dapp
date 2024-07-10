@@ -1,8 +1,8 @@
-import EncryptSVG from './assets/enkrypt.svg';
-import PolkadotSVG from './assets/polkadot.svg';
-import SubwalletSVG from './assets/subwallet.svg';
-import TalismanSVG from './assets/talisman.svg';
-import NovaSVG from './assets/nova.svg';
+import EncryptSVG from '@/vendor/gear/ui/features/wallet/assets/enkrypt.svg';
+import PolkadotSVG from '@/vendor/gear/ui/features/wallet/assets/polkadot.svg';
+import SubwalletSVG from '@/vendor/gear/ui/features/wallet/assets/subwallet.svg';
+import TalismanSVG from '@/vendor/gear/ui/features/wallet/assets/talisman.svg';
+import NovaSVG from '@/vendor/gear/ui/features/wallet/assets/nova.svg';
 import { Wallets } from './types';
 
 // const isNovaWallet = !!window?.walletExtension?.isNovaWallet;

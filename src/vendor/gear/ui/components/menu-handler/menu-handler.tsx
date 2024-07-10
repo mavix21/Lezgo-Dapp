@@ -2,17 +2,14 @@ import { motion } from 'framer-motion';
 import { MenuOptions, MenuOptionsClassNameProps } from '../menu-options';
 import { MobileMenu, MobileMenuClassNameProps } from '../mobile-menu';
 import BurgerMenuSVG from './assets/burger-menu.svg';
-import CrossSVG from '../../assets/cross-icon.svg';
+import CrossSVG from '@/vendor/gear/ui/assets/cross-icon.svg';
 import {
   Wallet,
   WalletClassNameProps,
 } from '../../features/wallet/components/wallet';
 import React, { useRef, useState } from 'react';
 import { useAccount } from '@gear-js/react-hooks';
-import {
-  useClickOutside,
-  useRootModalRef,
-} from '@/components/vendor/gear/utils';
+import { useClickOutside, useRootModalRef } from '@/vendor/gear/ui/utils';
 import { clsx } from 'clsx';
 import styles from './menu-handler.module.css';
 import { Button } from '@gear-js/vara-ui';

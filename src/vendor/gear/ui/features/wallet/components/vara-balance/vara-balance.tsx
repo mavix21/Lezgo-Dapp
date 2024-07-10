@@ -5,8 +5,8 @@ import {
   useBalanceFormat,
   useDeriveBalancesAll,
 } from '@gear-js/react-hooks';
-import VaraSVG from '@/components/vendor/gear/features/wallet/assets/vara-coin.svg';
-import TVaraSVG from '@/components/vendor/gear/features/wallet/assets/tvara-coin.svg';
+import VaraSVG from '@/vendor/gear/ui/features/wallet/assets/vara-coin.svg';
+import TVaraSVG from '@/vendor/gear/ui/features/wallet/assets/tvara-coin.svg';
 import styles from './vara-balance.module.css';
 
 type Props = {

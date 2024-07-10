@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic';
 
 const MenuHandler = dynamic(
   () =>
-    import('../../vendor/gear/components/menu-handler').then(
+    import('../../../vendor/gear/ui/components/menu-handler').then(
       (mod) => mod.MenuHandler,
     ),
   { ssr: false, loading: () => <div>Loading...</div> },

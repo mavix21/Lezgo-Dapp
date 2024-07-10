@@ -6,11 +6,7 @@ import { Hero } from '@/components/layout/Hero';
 export default function HomePage() {
   return (
     <div className="nice-gradient | min-h-svh relative z-0">
-      {/*-z-[2]*/}
-      {/*<header className="p-4 bg-gradient-to-r from-blue-200 via-green-200 to-yellow-200"></header>*/}
       <div className="grain"></div>
-      {/*bg-[length:2353px_1969px] w-[2353px] h-[1969px]*/}
-      {/*-z-[1]*/}
       <div className="h-full w-full blur-3xl absolute m-auto backdrop-brightness-75 mix-blend-exclusion -z-10" />
       <Header />
       <Hero />
