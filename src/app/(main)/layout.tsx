@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Space_Grotesk } from 'next/font/google';
 import '../globals.css';
 import { withProviders } from '@/hocs';
+import { Header } from '@/components/layout/header/Header';
 
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] });
 
@@ -16,6 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   // const childrenWrapped = withProviders(children);
+
   return (
     <html lang="en">
       <body className={`${spaceGrotesk.className} dark`}>{children}</body>

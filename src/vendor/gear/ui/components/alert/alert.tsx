@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { AlertProps } from './alert.types';
-import styles from './alert.module.scss';
+import styles from './alert.module.css';
 import { Button } from '@/components/ui/button';
 import { Cross } from 'lucide-react';
 

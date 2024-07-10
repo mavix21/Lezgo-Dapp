@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 // import { MenuHandler } from '@/components/vendor/gear/components/menu-handler/menu-handler';
 import styles from './header.module.css';
 import dynamic from 'next/dynamic';
+import { withProviders } from '@/hocs';
+import { Menu } from 'lucide-react';
 
 const MenuHandler = dynamic(
   () =>
@@ -13,6 +15,16 @@ const MenuHandler = dynamic(
     ),
   { ssr: false, loading: () => <div>Loading...</div> },
 );
+
+const withProvidersAndProps = (WrappedComponent: any) => {
+  const WithProvidersAndProps = (props: any) => {
+    const WrappedWithProviders = withProviders(WrappedComponent);
+    return <WrappedWithProviders {...props} />;
+  };
+  return WithProvidersAndProps;
+};
+
+const MenuHandlerWrapped = withProvidersAndProps(MenuHandler);
 
 export function Header() {
   return (
@@ -38,7 +50,7 @@ export function Header() {
           priority
         />
         {/*<Button variant="default">Login</Button>*/}
-        <MenuHandler
+        <MenuHandlerWrapped
           className={{
             wallet: {
               balance: styles.walletBalance,
