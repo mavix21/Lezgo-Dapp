@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 
 export function Header() {
   return (
-    <header className="w-full fixed backdrop-blur-xl top-0 left-0 z-10 border-b border-gray-800">
+    <header className="w-full fixed backdrop-blur-md top-0 left-0 z-10 border-b border-gray-800">
       <div className="grid grid-cols-[1fr,1fr,auto] p-4">
         <div className="flex items-center space-x-6 text-white">
           <a href="#" className="hover:underline uppercase">
@@ -24,7 +24,7 @@ export function Header() {
           alt="Picture of the author"
           priority
         />
-        <Button variant="outline">Login</Button>
+        <Button variant="default">Login</Button>
       </div>
     </header>
   );

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Space_Grotesk } from 'next/font/google';
 import '../globals.css';
 
-const inter = Space_Grotesk({ subsets: ['latin'] });
+const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Lezgo Home Page',
@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${spaceGrotesk.className} dark`}>{children}</body>
     </html>
   );
 }
