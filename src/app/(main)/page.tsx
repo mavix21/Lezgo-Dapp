@@ -1,14 +1,12 @@
-import { Header } from '@/components/layout/header/Header';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 import { Hero } from '@/components/layout/Hero';
 
 export default function HomePage() {
   return (
-    <div className="nice-gradient | min-h-svh relative z-0">
+    <div className="h-full relative z-0">
       <div className="grain"></div>
       <div className="h-full w-full blur-3xl absolute m-auto backdrop-brightness-75 mix-blend-exclusion -z-10" />
-      <Header />
       <Hero />
       <section className="mt-16 px-8">
         <div className="flex items-center justify-between">

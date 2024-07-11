@@ -8,17 +8,6 @@
   margin: auto;
 }
 
-.walletBalance {
-  color: #fff;
-}
-
-.menuIcon {
-  & svg path {
-    fill: #000000;
-    stroke: #000000;
-  }
-}
-
 .vara-logo {
   margin-right: 22px;
 }

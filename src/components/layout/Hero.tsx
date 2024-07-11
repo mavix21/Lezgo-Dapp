@@ -13,7 +13,7 @@ export function Hero() {
       />
 
       <div className="absolute inset-0 -top-1/4 flex flex-col items-center justify-center text-center bg-black bg-opacity-60">
-        <h1 className="text-5xl text-primary font-bold">NEON FEST</h1>
+        <h1 className="text-7xl text-primary font-bold">NEON FEST</h1>
         <h2 className="text-2xl">ELECTRONIC MUSIC FESTIVAL</h2>
         <p className="mt-4">Join us for an unforgettable experience</p>
         <div className="flex space-x-4 mt-6">

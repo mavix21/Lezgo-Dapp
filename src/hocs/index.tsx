@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react';
+import { ComponentType, useEffect, useState } from 'react';
 import {
   ApiProvider as GearApiProvider,
   AlertProvider as GearAlertProvider,
@@ -65,15 +65,24 @@ const AlertProvider = ({ children }: ProviderProps) => (
 // }
 
 const providers = [
-  AlertProvider,
+  // AlertProvider,
   ApiProvider,
   // DnsProvider,
   AccountProvider,
   AppProvider,
 ];
 
-export const withProviders = (Component: ComponentType) => () =>
-  providers.reduceRight(
+export const withProviders = (Component: ComponentType) => () => {
+  // const [isMounted, setIsMounted] = useState(false);
+  //
+  // useEffect(() => {
+  //   setIsMounted(true);
+  // }, []);
+  //
+  // if (!isMounted) return <p>LOADINGGG...</p>;
+
+  return providers.reduceRight(
     (children, Provider) => <Provider>{children}</Provider>,
     <Component />,
   );
+};

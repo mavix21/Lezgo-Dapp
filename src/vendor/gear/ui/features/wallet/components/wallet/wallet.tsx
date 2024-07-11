@@ -1,10 +1,11 @@
-import { Button } from '@gear-js/vara-ui';
+// import { Button } from '@gear-js/vara-ui';
 import { useAccount } from '@gear-js/react-hooks';
 import { useEffect, useState } from 'react';
 import { AccountButton } from '../account-button';
 import { WalletModal } from '../wallet-modal';
 import styles from './wallet.module.css';
 import { VaraBalance } from '../vara-balance';
+import { Button } from '@/components/ui/button';
 
 export type ClassNameProps = {
   balance?: string;
@@ -42,12 +43,9 @@ function Wallet({ isWalletModalOpen, walletModalHandler, className }: Props) {
             />
           </div>
         ) : (
-          <Button
-            text="Connect Wallet"
-            color="primary"
-            className={styles.connectButton}
-            onClick={openModal}
-          />
+          <Button className="font-bold" variant="default" onClick={openModal}>
+            Connect Wallet
+          </Button>
         )}
       </div>
 

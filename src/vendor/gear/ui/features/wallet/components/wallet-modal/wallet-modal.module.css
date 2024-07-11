@@ -226,8 +226,9 @@
     position: relative;
     width: 100%;
     max-width: 400px;
-    background-color: #f6f8f8;
-    color: #000;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    border: 1px solid hsl(var(--border));
 
     @media screen and (min-width: 768px) {
       --scale-closed: 90%;
