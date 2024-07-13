@@ -65,7 +65,7 @@ const AlertProvider = ({ children }: ProviderProps) => (
 // }
 
 const providers = [
-  // AlertProvider,
+  AlertProvider,
   ApiProvider,
   // DnsProvider,
   AccountProvider,
