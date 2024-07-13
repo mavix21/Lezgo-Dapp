@@ -1,15 +1,16 @@
 import dynamic from 'next/dynamic';
 import { Navbar } from '@/components/layout/Navbar';
 import { Logo } from '@/components/layout/Logo';
-import { MenuHandler } from '@/vendor/gear/ui/components/menu-handler';
+import { Skeleton } from '@/components/ui/skeleton';
+// import { MenuHandler } from '@/vendor/gear/ui/components/menu-handler';
 
-// const MenuHandler = dynamic(
-//   () =>
-//     import('@/vendor/gear/ui/components/menu-handler').then(
-//       (mod) => mod.MenuHandler,
-//     ),
-//   { ssr: false, loading: () => <div>Loading...</div> },
-// );
+const MenuHandler = dynamic(
+  () => import('@/vendor/gear/ui/components/menu-handler/menu-handler'),
+  {
+    ssr: false,
+    loading: () => <Skeleton className="h-10 w-[135px] rounded-md" />,
+  },
+);
 
 export function Header() {
   return (
