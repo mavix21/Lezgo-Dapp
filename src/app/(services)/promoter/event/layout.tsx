@@ -12,9 +12,6 @@ export default function DashboardLayout({
 }) {
     return (
         <>
-            <div className='bg-slate-400'>
-                Event Layout
-            </div>
             {children}
         </>
 
