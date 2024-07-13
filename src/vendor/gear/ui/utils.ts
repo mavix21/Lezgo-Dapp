@@ -37,7 +37,11 @@ export const copyToClipboard = async ({
     document.body.removeChild(textArea);
   }
 
-  if (window.isSecureContext && navigator.clipboard) {
+  if (
+    typeof window !== 'undefined' &&
+    window.isSecureContext &&
+    navigator.clipboard
+  ) {
     navigator.clipboard
       .writeText(value)
       .then(() => onSuccess())
@@ -97,6 +101,7 @@ export function useRootModalRef() {
 }
 
 export const isMobileDevice =
+  typeof window !== 'undefined' &&
   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent,
   );

@@ -5,27 +5,21 @@ import TalismanSVG from '@/vendor/gear/ui/features/wallet/assets/talisman.svg';
 import NovaSVG from '@/vendor/gear/ui/features/wallet/assets/nova.svg';
 import { Wallets } from './types';
 
-// const isNovaWallet = !!window?.walletExtension?.isNovaWallet;
+const isNovaWallet =
+  typeof window !== 'undefined' &&
+  !!(window as any)?.walletExtension?.isNovaWallet;
 
-// const WALLET = isNovaWallet
-//   ? {
-//       'polkadot-js': { name: 'Nova Wallet', SVG: NovaSVG },
-//       'subwallet-js': { name: 'SubWallet', SVG: SubwalletSVG },
-//     }
-//   : {
-//       'polkadot-js': { name: 'Polkadot JS', SVG: PolkadotSVG },
-//       'subwallet-js': { name: 'SubWallet', SVG: SubwalletSVG },
-//       talisman: { name: 'Talisman', SVG: TalismanSVG },
-//       enkrypt: { name: 'Enkrypt', SVG: EncryptSVG },
-//     };
-//
-
-const WALLET = {
-  'polkadot-js': { name: 'Polkadot JS', SVG: PolkadotSVG },
-  'subwallet-js': { name: 'SubWallet', SVG: SubwalletSVG },
-  talisman: { name: 'Talisman', SVG: TalismanSVG },
-  enkrypt: { name: 'Enkrypt', SVG: EncryptSVG },
-};
+const WALLET = isNovaWallet
+  ? {
+      'polkadot-js': { name: 'Nova Wallet', SVG: NovaSVG },
+      'subwallet-js': { name: 'SubWallet', SVG: SubwalletSVG },
+    }
+  : {
+      'polkadot-js': { name: 'Polkadot JS', SVG: PolkadotSVG },
+      'subwallet-js': { name: 'SubWallet', SVG: SubwalletSVG },
+      talisman: { name: 'Talisman', SVG: TalismanSVG },
+      enkrypt: { name: 'Enkrypt', SVG: EncryptSVG },
+    };
 
 const WALLETS = Object.entries(WALLET) as Wallets;
 

@@ -16,6 +16,23 @@ import { clsx } from 'clsx';
 import styles from './menu-handler.module.css';
 import { Button } from '@gear-js/vara-ui';
 import { withProviders } from '@/hocs';
+import dynamic from 'next/dynamic';
+
+// const MenuOptions = dynamic(
+//   () => import('../menu-options').then((mod) => mod.MenuOptions),
+//   { ssr: false },
+// );
+//
+// const MobileMenu = dynamic(
+//   () => import('../mobile-menu').then((mod) => mod.MobileMenu),
+//   { ssr: false },
+// );
+//
+// const Wallet = dynamic(
+//   () =>
+//     import('../../features/wallet/components/wallet').then((mod) => mod.Wallet),
+//   { ssr: false },
+// );
 
 type Props = {
   customItems?: {
@@ -140,4 +157,6 @@ function Component({ customItems, className }: Props) {
 //   return <WrappedWithProviders {...props} />;
 // };
 //
-export const MenuHandler = withProviders(Component);
+const MenuHandler = withProviders(Component);
+
+export default MenuHandler;
