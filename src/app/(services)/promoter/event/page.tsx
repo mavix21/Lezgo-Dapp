@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 // import { FormDataSchema } from '@/lib/schema'
 import { formSchema } from '@/lib/schema'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 // const processForm: SubmitHandler<Inputs> = data => {
 //   console.log(data)
@@ -34,12 +35,12 @@ const steps = [
   {
     id: 'Step 1',
     name: 'Event Details',
-    fields: ['username']
+    fields: ['name', 'category', 'description']
   },
   {
     id: 'Step 2',
     name: 'Location',
-    fields: ['country', 'state', 'city', 'street', 'zip']
+    fields: ['city', 'address', 'reference']
   },
   {
     id: 'Step 3',
@@ -69,7 +70,12 @@ export default function EventPage() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      name: "",
+      category: "",
+      description: "",
+      city: "",
+      address: "",
+      reference: "",
     },
   })
 
@@ -146,7 +152,7 @@ export default function EventPage() {
 
       {/* Form */}
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           {currentStep === 0 && (
             <motion.div
               initial={{ x: delta >= 0 ? '50%' : '-50%', opacity: 0 }}
@@ -155,12 +161,118 @@ export default function EventPage() {
             >
               <FormField
                 control={form.control}
-                name="username"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>Name of the event</FormLabel>
                     <FormControl>
-                      <Input placeholder="shadcn" {...field} />
+                      <Input placeholder="" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      value={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a category" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="art_culture">Art & Culture</SelectItem>
+                          <SelectItem value="concerts">Concerts</SelectItem>
+                          <SelectItem value="sports">Sports</SelectItem>
+                          <SelectItem value="festivals">Festivals</SelectItem>
+                          <SelectItem value="theater">Theater</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Description of the event</FormLabel>
+                    <FormControl>
+                      <Input placeholder="" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </motion.div>
+          )}
+
+          {currentStep === 1 && (
+            <motion.div
+              initial={{ x: delta >= 0 ? '20%' : '-20%', opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+            >
+              <FormField
+                control={form.control}
+                name="city"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>City</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      value={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a city" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="lima">Lima</SelectItem>
+                          <SelectItem value="arequipa">Arequipa</SelectItem>
+                          <SelectItem value="cajamarca">Cajamarca</SelectItem>
+                          <SelectItem value="ancash">Ancash</SelectItem>
+                          <SelectItem value="huancavelica">Huancavelica</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="address"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Address</FormLabel>
+                    <FormControl>
+                      <Input placeholder="" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="reference"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Reference</FormLabel>
+                    <FormControl>
+                      <Input placeholder="" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
