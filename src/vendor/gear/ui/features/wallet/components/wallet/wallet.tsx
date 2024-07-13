@@ -52,7 +52,7 @@ function Wallet({ isWalletModalOpen, walletModalHandler, className }: Props) {
       <WalletModal
         onClose={closeModal}
         open={isModalOpen}
-        setOpen={openModal}
+        setOpen={setIsModalOpen}
       />
     </>
   ) : null;

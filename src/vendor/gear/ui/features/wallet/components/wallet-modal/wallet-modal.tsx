@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAccount, useAlert } from '@gear-js/react-hooks';
-import { Dialog } from '@headlessui/react';
+// import { Dialog } from '@headlessui/react';
 import { copyToClipboard, isMobileDevice } from '../../../../utils';
 import { WALLETS } from '../../consts';
 import { useWallet } from '../../hooks';
@@ -14,6 +14,14 @@ import { ArrayElement } from '../../../../types';
 import { Wallets } from '../../types';
 import clsx from 'clsx';
 import { CopyIcon, CrossIcon, EditIcon, LogOut } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 
 function WalletModal({ onClose, open, setOpen }: WalletModalProps) {
   const alert = useAlert();
@@ -143,104 +151,78 @@ function WalletModal({ onClose, open, setOpen }: WalletModalProps) {
   const isScrollable = (walletAccounts?.length || 0) > 6;
 
   return (
-    <AnimatePresence initial={false}>
-      {open && (
-        <Dialog
-          as={motion.div}
-          initial="closed"
-          animate="open"
-          exit="closed"
-          static
-          className={styles.modal}
-          open={open}
-          onClose={onClose}
-        >
-          <motion.div variants={variantsOverlay} className={styles.backdrop} />
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Wallet connection</DialogTitle>
+          <DialogDescription className="sr-only">
+            Select a wallet to connect
+          </DialogDescription>
+        </DialogHeader>
+        {accounts?.length ? (
+          <ScrollArea
+            className={styles.content}
+            type={isScrollable ? 'always' : undefined}
+          >
+            <ul
+              className={clsx(
+                styles.list,
+                isScrollable ? styles['list--scroll'] : '',
+              )}
+            >
+              {getAccounts() || getWallets()}
+            </ul>
+          </ScrollArea>
+        ) : (
+          <>
+            {isMobileDevice ? (
+              <p>
+                To use this application on the mobile devices, open this page
+                inside the compatible wallets like SubWallet or Nova.
+              </p>
+            ) : (
+              <p>
+                A compatible wallet was not found or is disabled. Install it
+                following the{' '}
+                <a
+                  href="https://wiki.vara-network.io/docs/account/create-account/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.external}
+                >
+                  instructions
+                </a>
+                .
+              </p>
+            )}
 
-          <div className={styles.wrapper}>
-            <div className={styles.container}>
-              <Dialog.Panel
-                as={motion.div}
-                variants={variantsPanel}
-                className={styles.modalContent}
-              >
-                <div className={styles.header}>
-                  <Dialog.Title as="h2" className={styles.title}>
-                    Wallet connection
-                  </Dialog.Title>
-                  <button className={styles.close} onClick={onClose}>
-                    <CrossIcon />
-                  </button>
-                </div>
-                {accounts?.length ? (
-                  <ScrollArea
-                    className={styles.content}
-                    type={isScrollable ? 'always' : undefined}
+            {wallet && (
+              <div className={styles.footer}>
+                <button
+                  type="button"
+                  className={styles.walletButton}
+                  onClick={resetWalletId}
+                >
+                  <WalletItem Icon={wallet.SVG} name={wallet.name} />
+
+                  <EditIcon />
+                </button>
+
+                {account && (
+                  <button
+                    className={styles.textButton}
+                    onClick={handleLogoutButtonClick}
                   >
-                    <ul
-                      className={clsx(
-                        styles.list,
-                        isScrollable ? styles['list--scroll'] : '',
-                      )}
-                    >
-                      {getAccounts() || getWallets()}
-                    </ul>
-                  </ScrollArea>
-                ) : (
-                  <>
-                    {isMobileDevice ? (
-                      <p>
-                        To use this application on the mobile devices, open this
-                        page inside the compatible wallets like SubWallet or
-                        Nova.
-                      </p>
-                    ) : (
-                      <p>
-                        A compatible wallet was not found or is disabled.
-                        Install it following the{' '}
-                        <a
-                          href="https://wiki.vara-network.io/docs/account/create-account/"
-                          target="_blank"
-                          rel="noreferrer"
-                          className={styles.external}
-                        >
-                          instructions
-                        </a>
-                        .
-                      </p>
-                    )}
-                  </>
+                    <LogOut className={styles.svgIcon} />
+                    <span>Exit</span>
+                  </button>
                 )}
-
-                {wallet && (
-                  <div className={styles.footer}>
-                    <button
-                      type="button"
-                      className={styles.walletButton}
-                      onClick={resetWalletId}
-                    >
-                      <WalletItem Icon={wallet.SVG} name={wallet.name} />
-
-                      <EditIcon />
-                    </button>
-
-                    {account && (
-                      <button
-                        className={styles.textButton}
-                        onClick={handleLogoutButtonClick}
-                      >
-                        <LogOut className={styles.svgIcon} />
-                        <span>Exit</span>
-                      </button>
-                    )}
-                  </div>
-                )}
-              </Dialog.Panel>
-            </div>
-          </div>
-        </Dialog>
-      )}
-    </AnimatePresence>
+              </div>
+            )}
+          </>
+        )}
+      </DialogContent>
+    </Dialog>
   );
 }
 
