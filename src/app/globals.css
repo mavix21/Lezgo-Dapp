@@ -31,23 +31,23 @@
   .dark {
     --background: 82 44% 5%;
     --foreground: 60 9.1% 97.8%;
-    --card: 80 60% 1%;
+    --card: 82 44% 5%;
     --card-foreground: 60 9.1% 97.8%;
-    --popover: 224 71.4% 4.1%;
-    --popover-foreground: 210 20% 98%;
+    --popover: 82 44% 5%;
+    --popover-foreground: 60 9.1% 97.8%;
     --primary: 82 93% 61%;
     --primary-foreground: 26 83.3% 14.1%;
     --secondary: 12 6.5% 15.1%;
     --secondary-foreground: 60 9.1% 97.8%;
     --muted: 12 6.5% 15.1%;
     --muted-foreground: 24 5.4% 63.9%;
-    --accent: 80 7% 17%;
+    --accent: 12 6.5% 15.1%;
     --accent-foreground: 60 9.1% 97.8%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 60 9.1% 97.8%;
-    --border: 215 27.9% 16.9%;
-    --input: 215 27.9% 16.9%;
-    --ring: 263.4 70% 50.4%;
+    --border: 12 6.5% 15.1%;
+    --input: 12 6.5% 15.1%;
+    --ring: 35.5 91.7% 32.9%;
   }
 }
 
@@ -74,14 +74,6 @@
   z-index: 1;
 }
 
-.gradient {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  opacity: 0.5;
-}
-
 .hero-bg-img {
   background-image: url('/HeroBackground.webp');
 }
@@ -93,7 +85,7 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 /* Track */
@@ -103,11 +95,11 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted));
-  border-radius: 5px;
+  background: hsl(var(--foreground) / 0.7);
+  border-radius: 99px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted) / 0.9);
+  background: hsl(var(--foreground) / 0.5);
 }
