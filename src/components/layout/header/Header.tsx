@@ -1,7 +1,8 @@
 import dynamic from 'next/dynamic';
-import { Navbar } from '@/components/layout/Navbar';
+import { NavbarHandler } from '@/components/layout/NavbarHandler';
 import { Logo } from '@/components/layout/Logo';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Suspense } from 'react';
 // import { MenuHandler } from '@/vendor/gear/ui/components/menu-handler';
 
 const MenuHandler = dynamic(
@@ -15,10 +16,12 @@ const MenuHandler = dynamic(
 export function Header() {
   return (
     <header className="header w-full fixed backdrop-blur-md top-0 left-0 z-10 border-b border-gray-800">
-      <div className="grid grid-cols-[1fr,1fr,auto] p-4">
-        <Navbar />
+      <div className="grid items-center grid-cols-[1fr,1fr,auto] p-4">
+        <NavbarHandler />
         <Logo />
-        <MenuHandler />
+        <div className="min-w-[135px]">
+          <MenuHandler />
+        </div>
       </div>
     </header>
   );
