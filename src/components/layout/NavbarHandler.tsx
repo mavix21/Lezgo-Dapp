@@ -1,7 +1,6 @@
 'use client';
 
 import { useMediaQuery } from '@/hooks/use-media-query';
-import { NavItems } from '@/components/layout/NavItems';
 import { MobileNavbar } from '@/components/layout/MobileNavbar';
 import { useEffect, useState } from 'react';
 import { MenuIcon } from 'lucide-react';
