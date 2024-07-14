@@ -158,17 +158,18 @@ export default function EventPage() {
               initial={{ x: delta >= 0 ? '50%' : '-50%', opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
+              className='space-y-8'
             >
               <FormField
                 control={form.control}
                 name="name"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className='relative'>
                     <FormLabel>Name of the event</FormLabel>
                     <FormControl>
                       <Input placeholder="" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className='absolute'/>
                   </FormItem>
                 )}
               />
@@ -176,7 +177,7 @@ export default function EventPage() {
                 control={form.control}
                 name="category"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className='relative'>
                     <FormLabel>Category</FormLabel>
                     <Select
                       onValueChange={field.onChange}
@@ -197,7 +198,7 @@ export default function EventPage() {
                         </SelectGroup>
                       </SelectContent>
                     </Select>
-                    <FormMessage />
+                    <FormMessage className='absolute'/>
                   </FormItem>
                 )}
               />
@@ -205,12 +206,12 @@ export default function EventPage() {
                 control={form.control}
                 name="description"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className='relative'>
                     <FormLabel>Description of the event</FormLabel>
                     <FormControl>
                       <Input placeholder="" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className='absolute'/>
                   </FormItem>
                 )}
               />
@@ -222,12 +223,13 @@ export default function EventPage() {
               initial={{ x: delta >= 0 ? '20%' : '-20%', opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
+              className='space-y-8'
             >
               <FormField
                 control={form.control}
                 name="city"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className='relative'>
                     <FormLabel>City</FormLabel>
                     <Select
                       onValueChange={field.onChange}
@@ -243,12 +245,12 @@ export default function EventPage() {
                           <SelectItem value="lima">Lima</SelectItem>
                           <SelectItem value="arequipa">Arequipa</SelectItem>
                           <SelectItem value="cajamarca">Cajamarca</SelectItem>
-                          <SelectItem value="ancash">Ancash</SelectItem>
+                          <SelectItem value="ancash">Áncash</SelectItem>
                           <SelectItem value="huancavelica">Huancavelica</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>
-                    <FormMessage />
+                    <FormMessage className='absolute'/>
                   </FormItem>
                 )}
               />
@@ -256,12 +258,12 @@ export default function EventPage() {
                 control={form.control}
                 name="address"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className='relative'>
                     <FormLabel>Address</FormLabel>
                     <FormControl>
                       <Input placeholder="" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className='absolute'/>
                   </FormItem>
                 )}
               />
@@ -269,12 +271,12 @@ export default function EventPage() {
                 control={form.control}
                 name="reference"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className='relative'>
                     <FormLabel>Reference</FormLabel>
                     <FormControl>
                       <Input placeholder="" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className='absolute'/>
                   </FormItem>
                 )}
               />
