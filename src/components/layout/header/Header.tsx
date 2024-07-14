@@ -2,8 +2,6 @@ import dynamic from 'next/dynamic';
 import { NavbarHandler } from '@/components/layout/NavbarHandler';
 import { Logo } from '@/components/layout/Logo';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Suspense } from 'react';
-// import { MenuHandler } from '@/vendor/gear/ui/components/menu-handler';
 
 const MenuHandler = dynamic(
   () => import('@/vendor/gear/ui/components/menu-handler/menu-handler'),
