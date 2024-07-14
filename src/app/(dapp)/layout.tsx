@@ -18,10 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${spaceGrotesk.className} dark`}>
-        <div className="min-h-svh">
-          <Header />
-          {children}
-        </div>
+        <div className="min-h-svh">{children}</div>
       </body>
     </html>
   );
