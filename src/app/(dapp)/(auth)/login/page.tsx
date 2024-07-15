@@ -1,16 +1,14 @@
-// import LoginForm from '@/app/ui/login-form';
 import { Logo } from '@/components/layout/Logo';
+import { LoginForm } from '../_components/LoginForm';
 
 export default function LoginPage() {
   return (
-    <main className="flex items-center justify-center md:h-screen">
-      <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
-        <div className="flex h-20 w-full items-end rounded-lg bg-blue-500 p-3 md:h-36">
-          <div className="w-32 text-foreground md:w-36">
-            <Logo />
-          </div>
+    <main className="flex items-center justify-center h-svh">
+      <div className="relative mx-auto flex w-[min(100%,24rem)] max-w-[400px] flex-col border rounded-md space-y-2.5 p-4">
+        <div className="mx-auto">
+          <Logo />
         </div>
-        {/*<LoginForm />*/}
+        <LoginForm />
       </div>
     </main>
   );
