@@ -38,6 +38,3 @@ next-env.d.ts
 
 yarn.lock
 /.idea
-
-# db migrations
-src/server/db/migrations
