@@ -1,24 +1,25 @@
 import {
   integer,
   pgTable,
+  serial,
   text,
   timestamp,
   uuid,
   varchar,
 } from 'drizzle-orm/pg-core';
 import { relations, sql } from 'drizzle-orm';
-import { eventCategory, promoter } from '.';
+import { eventCategories, promoters } from '.';
 
-const event = pgTable('event', {
+const events = pgTable('event', {
   id: uuid('id')
     .primaryKey()
     .default(sql`gen_random_uuid()`),
-  promoterId: uuid('promoter_id')
+  promoterId: integer('promoter_id')
     .notNull()
-    .references(() => promoter.id),
+    .references(() => promoters.id),
   eventCategoryId: integer('event_category_id')
     .notNull()
-    .references(() => eventCategory.id),
+    .references(() => eventCategories.id),
   name: varchar('name', { length: 50 }).notNull(),
   description: text('description').notNull(),
   startDate: timestamp('start_date').notNull(),
@@ -28,15 +29,15 @@ const event = pgTable('event', {
   updatedAt: timestamp('updated_at'),
 });
 
-export default event;
+export default events;
 
-export const eventRelations = relations(event, ({ one }) => ({
-  promoter: one(promoter, {
-    fields: [event.promoterId],
-    references: [promoter.id],
+export const eventRelations = relations(events, ({ one }) => ({
+  promoter: one(promoters, {
+    fields: [events.promoterId],
+    references: [promoters.id],
   }),
-  category: one(eventCategory, {
-    fields: [event.eventCategoryId],
-    references: [eventCategory.id],
+  category: one(eventCategories, {
+    fields: [events.eventCategoryId],
+    references: [eventCategories.id],
   }),
 }));

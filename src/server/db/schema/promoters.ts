@@ -1,25 +1,24 @@
 import { relations, sql } from 'drizzle-orm';
-import { pgTable, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
-import { event } from '.';
+import { pgTable, serial, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
+import { events, users } from '.';
 
-const promoter = pgTable('promoter', {
-  id: uuid('id')
-    .primaryKey()
-    .default(sql`gen_random_uuid()`),
+const promoters = pgTable('promoter', {
+  id: serial('id').primaryKey(),
+  userId: uuid('user_id')
+    .notNull()
+    .references(() => users.id),
   walletAddress: varchar('wallet_address', { length: 50 }),
   firstName: varchar('first_name', { length: 50 }).notNull(),
   middleName: varchar('middle_name', { length: 50 }),
   lastName1: varchar('last_name', { length: 50 }).notNull(),
   lastName2: varchar('last_name2', { length: 50 }),
   companyName: varchar('company_name', { length: 50 }).notNull(),
-  password: varchar('password', { length: 50 }).notNull(),
-  email: varchar('email', { length: 50 }).notNull().default(''),
   createdAt: timestamp('created_at').default(sql`now()`),
   updatedAt: timestamp('updated_at'),
 });
 
-export default promoter;
+export default promoters;
 
-export const promoterRelations = relations(promoter, ({ many }) => ({
-  events: many(event),
+export const promoterRelations = relations(promoters, ({ many }) => ({
+  events: many(events),
 }));
