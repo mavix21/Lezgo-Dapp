@@ -1,21 +1,18 @@
 import { z } from 'zod';
 
-// export const FormDataSchema = z.object({
-//   firstName: z.string().min(1, 'First name is required'),
-//   lastName: z.string().min(1, 'Last name is required'),
-//   email: z.string().min(1, 'Email is required').email('Invalid email address'),
-//   country: z.string().min(1, 'Country is required'),
-//   street: z.string().min(1, 'Street is required'),
-//   city: z.string().min(1, 'City is required'),
-//   state: z.string().min(1, 'State is required'),
-//   zip: z.string().min(1, 'Zip is required')
-// })
+const entrySchema = z.object({
+  ticket_name: z.string().min(2, {
+    message: 'Ticket name must be at least 2 characters.',
+  }),
+  quantity: z.coerce.number(),
+  price: z.coerce.number(),
+});
 
 export const formSchema = z.object({
   name: z.string().min(2, {
     message: 'Name of the event must be at least 2 characters.',
   }),
-  category: z.string().min(2, {
+  category: z.string().min(1, {
     message: 'Category is required.',
   }),
   description: z.string().min(2, {
@@ -30,7 +27,15 @@ export const formSchema = z.object({
   reference: z.string().min(2, {
     message: 'Reference must be at least 2 characters.',
   }),
-  //   description: z.string().min(1, {
-  //     message: 'First name is required',
-  //   }),
+  start_date: z.date({
+    required_error: 'Start date is required.',
+  }),
+  end_date: z.date({
+    required_error: 'End date is required.',
+  }),
+  //entries: z.array(entrySchema),
 });
+
+// export const formSchema = z.object({
+//   username: z.string().min(2).max(50),
+// })

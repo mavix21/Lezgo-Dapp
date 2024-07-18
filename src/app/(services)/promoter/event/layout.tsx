@@ -1,3 +1,4 @@
+import { StepsProvider } from "@/context/ctx-event-steps";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,7 +13,9 @@ export default function DashboardLayout({
 }) {
     return (
         <>
-            {children}
+            <StepsProvider>
+                {children}
+            </StepsProvider>
         </>
 
     );
