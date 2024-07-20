@@ -1,28 +1,24 @@
 import Link from "next/link";
 
 import {
-  Bell,
-  CircleUser,
   File,
-  LineChart,
   ListFilter,
-  Menu,
-  Package,
-  Package2,
-  Search,
-  ShoppingCart,
-  Users,
 } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { CategoriesCombo } from "@/components/layout/promoter/event/ComboBox";
+import { getEvents } from "@/actions/get-events";
+import { columns, Event, } from "@/components/layout/promoter/dashboard/columns";
+import { DataTable } from "@/components/layout/promoter/dashboard/data-table";
 
-export default function Home() {
+
+
+export default async function Home() {
+  //const data = await getData()
+  const data = await getEvents();
+
   return (
     <main className="bg-background text-foreground flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
       <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
@@ -121,7 +117,9 @@ export default function Home() {
                 <CardTitle>Events</CardTitle>
               </CardHeader>
               <CardContent>
-                <Table>
+                <DataTable columns={columns} data={data} />
+
+                {/* <Table>
                   <TableHeader>
                     <TableRow>
                       <TableHead>Name</TableHead>
@@ -299,7 +297,7 @@ export default function Home() {
                       <TableCell className="text-right">$450.00</TableCell>
                     </TableRow>
                   </TableBody>
-                </Table>
+                </Table> */}
               </CardContent>
             </Card>
           </TabsContent>
