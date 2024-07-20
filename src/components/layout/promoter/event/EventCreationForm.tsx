@@ -8,6 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { steps } from "@/constants/consts"
 import { useSteps } from "@/context/ctx-event-steps"
+import { insEvent } from "@/hooks/use-event"
 import { useEventCategories } from "@/hooks/use-event-categories"
 import { formSchema } from "@/lib/schema"
 import { cn } from "@/lib/utils"
@@ -24,6 +25,15 @@ const processForm: SubmitHandler<Inputs> = data => {
 
 type Inputs = z.infer<typeof formSchema>
 
+interface Props {
+  promoter_id: number;
+  event_category_id: number;
+  name: string;
+  description: string;
+  start_date: Date;
+  end_date: Date;
+  address: string;
+}
 
 export default function EventCreationForm() {
   const { categories, loading } = useEventCategories()
@@ -74,11 +84,19 @@ export default function EventCreationForm() {
   }
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    //useEvent();
     console.log(1)
     console.log(values)
+
+    try {
+      const response = await insEvent({ promoter_id: 2, event_category_id: parseInt(values.category, 10), name: values.name, description: values.description, start_date: values.start_date, end_date: values.end_date, address: values.address });
+
+    } catch (error) {
+      console.error('Error creating event: ', error)
+    }
   }
 
   type FieldName = keyof z.infer<typeof formSchema>
