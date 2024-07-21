@@ -7,7 +7,7 @@ const users = pgTable('user', {
     .default(sql`gen_random_uuid()`),
   walletAddress: varchar('wallet_address', { length: 50 }),
   name: varchar('name', { length: 50 }).notNull().unique(),
-  password: varchar('password', { length: 50 }).notNull(),
+  password: varchar('password', { length: 50 }),
   email: varchar('email').notNull().unique(),
   emailVerified: timestamp('email_verified_at', { mode: 'date' }),
   image: text('image'),
