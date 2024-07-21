@@ -1,5 +1,6 @@
 import { Sidebar } from '@/components/layout/promoter/Sidebar';
 import { Button } from '@/components/ui/button';
+import { Toaster } from '@/components/ui/sonner';
 import { Search, User } from 'lucide-react';
 import type { Metadata } from 'next';
 import Image from 'next/image';
@@ -30,10 +31,11 @@ export default function PromoterLayout({
               size="icon"
               className="overflow-hidden rounded-full bg-background"
             >
-              <User/>
+              <User />
             </Button>
           </header>
           {children}
+          <Toaster />
         </div>
       </div>
     </div>

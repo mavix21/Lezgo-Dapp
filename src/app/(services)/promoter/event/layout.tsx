@@ -15,6 +15,7 @@ export default function DashboardLayout({
         <>
             <StepsProvider>
                 {children}
+                
             </StepsProvider>
         </>
 

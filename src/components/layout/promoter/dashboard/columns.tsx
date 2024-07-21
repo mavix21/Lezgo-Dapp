@@ -6,7 +6,8 @@ export type Event = {
     id: string
     name: string
     startDate: Date
-    endDate: Date
+    endDate: Date,
+    category: string
     //status: "confirmed" | "cancelled"
 }
 
@@ -14,6 +15,10 @@ export const columns: ColumnDef<Event>[] = [
     {
         accessorKey: "name",
         header: "Name",
+    },
+    {
+        accessorKey: "category",
+        header: "Category"
     },
     {
         accessorKey: "startDate",

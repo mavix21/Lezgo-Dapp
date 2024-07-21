@@ -13,6 +13,11 @@ interface Props {
 }
 
 export async function insEvent(params: Props) {
-  const response = await postEventCategories(params);
-  return response;
+  try {
+    const response = await postEventCategories(params);
+    return response;
+  } catch (error) {
+    console.error('Error in insEvent:', error);
+    throw error; // Asegúrate de que el error se propague
+  }
 }

@@ -15,8 +15,10 @@ import { cn } from "@/lib/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
 import { motion } from "framer-motion"
-import { CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react"
+import { CalendarIcon, Check, ChevronLeft, ChevronRight, CircleCheck, CircleX } from "lucide-react"
+import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from "react-hook-form"
+import { toast } from "sonner"
 import { z } from "zod"
 
 const processForm: SubmitHandler<Inputs> = data => {
@@ -38,6 +40,7 @@ interface Props {
 export default function EventCreationForm() {
   const { categories, loading } = useEventCategories()
   const { currentStep, setCurrentStep, setPreviousStep, delta } = useSteps();
+  const router = useRouter();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -84,18 +87,40 @@ export default function EventCreationForm() {
   }
 
   // 2. Define a submit handler.
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     //useEvent();
-    console.log(1)
-    console.log(values)
-
     try {
-      const response = await insEvent({ promoter_id: 2, event_category_id: parseInt(values.category, 10), name: values.name, description: values.description, start_date: values.start_date, end_date: values.end_date, address: values.address });
+      console.log('Calling insEvent...');
 
+      await insEvent({
+        promoter_id: 2,
+        event_category_id: parseInt(values.category, 10),
+        name: values.name,
+        description: values.description,
+        start_date: values.start_date,
+        end_date: values.end_date,
+        address: values.address
+      });
+
+      // Añade un log después de llamar a insEvent
+      console.log('insEvent result');
+
+      toast.success("Event has been created successfully.", {
+        icon: <CircleCheck />
+      });
+
+      // Usa un pequeño retraso para asegurar que el toast se muestre antes de la redirección
+      setTimeout(() => {
+        router.push('/promoter/dashboard');
+      }, 1000);
     } catch (error) {
-      console.error('Error creating event: ', error)
+      // Loguea el error completo
+      toast.error('An error has ocurred.', {
+        icon: <CircleX />,
+        //description: 'Please try again later.',
+      });
     }
   }
 
@@ -322,83 +347,9 @@ export default function EventCreationForm() {
                   </FormItem>
                 )}
               />
+
             </motion.div>
           )}
-          {/* 
-      {currentStep === 2 && (
-        <motion.div
-          initial={{ x: delta >= 0 ? '20%' : '-20%', opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-          className='space-y-8'
-        >
-          {entries.map((entry) => (
-            <div key={entry.id} className="grid grid-cols-3 gap-4 mt-4">
-              <div className="space-y-2">
-                <FormField
-                  control={form.control}
-                  //name="ticket_name"
-                  name={`entries.${entry.id}.ticket_name`}
-                  render={({ field }) => (
-                    <FormItem className='relative'>
-                      <FormLabel htmlFor={`nombre-${entry.id}`}>Ticket name</FormLabel>
-                      <FormControl>
-                        <Input id={`nombre-${entry.id}`} placeholder="" {...field} />
-                      </FormControl>
-                      <FormMessage className='absolute' />
-                    </FormItem>
-                  )}
-                />
-
-              </div>
-              <div className="space-y-2">
-                <FormField
-                  control={form.control}
-                  //name="quantity"
-                  name={`entries.${entry.id}.quantity`}
-                  render={({ field }) => (
-                    <FormItem className='relative'>
-                      <FormLabel htmlFor={`cantidad-${entry.id}`}>Quantity</FormLabel>
-                      <FormControl>
-                        <Input id={`cantidad-${entry.id}`} type='number' placeholder="0" {...field} />
-                      </FormControl>
-                      <FormMessage className='absolute' />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="space-y-2">
-                <FormField
-                  control={form.control}
-                  //name="price"
-                  name={`entries.${entry.id}.price`}
-                  render={({ field }) => (
-                    <FormItem className='relative'>
-                      <FormLabel htmlFor={`precio-${entry.id}`}>Price</FormLabel>
-                      <FormControl>
-                        <Input id={`precio-${entry.id}`} placeholder="0.00" step='0.01' {...field} />
-                      </FormControl>
-                      <FormMessage className='absolute' />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </div>
-          ))}
-          <div className="flex justify-end mt-4">
-            <Button variant="default" onClick={addEntry}>
-              <PlusIcon className="mr-2" />
-              Agregar entrada
-            </Button>
-            <Button variant="destructive" onClick={removeLastEntry} className="ml-2">
-              <TrashIcon className="mr-2" />
-              Eliminar última entrada
-            </Button>
-          </div>
-
-        </motion.div>
-      )} */}
-
           <Button type="submit">Submit</Button>
         </form>
       </Form >
