@@ -8,6 +8,13 @@
       "when": 1721020895308,
       "tag": "0000_easy_firestar",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1721104706141,
+      "tag": "0001_natural_doorman",
+      "breakpoints": true
     }
   ]
 }
