@@ -70,10 +70,6 @@ export default function EventCreationForm() {
     if (!output) return
 
     if (currentStep < steps.length - 1) {
-      // if (currentStep === steps.length - 2) {
-      //   // await handleSubmit(processForm)()
-      //   await form.handleSubmit(onSubmit)
-      // }
       setPreviousStep(currentStep)
       setCurrentStep(step => step + 1)
     }
@@ -88,9 +84,6 @@ export default function EventCreationForm() {
 
   // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    //useEvent();
     try {
       console.log('Calling insEvent...');
 
@@ -104,9 +97,6 @@ export default function EventCreationForm() {
         address: values.address
       });
 
-      // Añade un log después de llamar a insEvent
-      console.log('insEvent result');
-
       toast.success("Event has been created successfully.", {
         icon: <CircleCheck />
       });
@@ -116,7 +106,6 @@ export default function EventCreationForm() {
         router.push('/promoter/dashboard');
       }, 1000);
     } catch (error) {
-      // Loguea el error completo
       toast.error('An error has ocurred.', {
         icon: <CircleX />,
         //description: 'Please try again later.',
@@ -347,10 +336,9 @@ export default function EventCreationForm() {
                   </FormItem>
                 )}
               />
-
+              <Button type="submit">Submit</Button>
             </motion.div>
           )}
-          <Button type="submit">Submit</Button>
         </form>
       </Form >
 

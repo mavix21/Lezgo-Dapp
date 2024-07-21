@@ -12,13 +12,14 @@ import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMe
 import { getEvents } from "@/actions/get-events";
 import { columns, Event, } from "@/components/layout/promoter/dashboard/columns";
 import { DataTable } from "@/components/layout/promoter/dashboard/data-table";
+import { getEventCategories } from "@/actions/get-event-categories";
 
 
 
 export default async function Home() {
   //const data = await getData()
   const data = await getEvents();
-
+  const categories = await getEventCategories();
   return (
     <main className="bg-background text-foreground flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
       <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
@@ -90,15 +91,13 @@ export default async function Home() {
                 <DropdownMenuContent align="end">
                   <DropdownMenuLabel>Filter by</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuCheckboxItem checked>
-                    Fulfilled
-                  </DropdownMenuCheckboxItem>
-                  <DropdownMenuCheckboxItem>
-                    Declined
-                  </DropdownMenuCheckboxItem>
-                  <DropdownMenuCheckboxItem>
-                    Refunded
-                  </DropdownMenuCheckboxItem>
+                  {
+                    categories.map((category) => (
+                      <DropdownMenuCheckboxItem key={category.id}>
+                        {category.name}
+                      </DropdownMenuCheckboxItem>
+                    ))
+                  }
                 </DropdownMenuContent>
               </DropdownMenu>
               <Button
@@ -302,7 +301,7 @@ export default async function Home() {
             </Card>
           </TabsContent>
         </Tabs>
-      </div>
-    </main>
+      </div >
+    </main >
   )
 }
