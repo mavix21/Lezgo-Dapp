@@ -1,4 +1,9 @@
 import type { NextAuthConfig } from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
+import { logInSchema } from '@/app/(dapp)/(auth)/_lib/zod';
+import { db } from '@/server/db';
+import { eq } from 'drizzle-orm';
+import { users } from '@/server/db/schema';
 
 export const BASE_PATH = '/api/auth';
 
@@ -8,7 +13,27 @@ const config: NextAuthConfig = {
   pages: {
     signIn: '/login',
   },
-  providers: [],
+  providers: [
+    Credentials({
+      authorize: async (credentials) => {
+        const { data, success } = logInSchema.safeParse(credentials);
+
+        if (!success) {
+          throw new Error('Invalid credentials');
+        }
+
+        const user = await db.query.users.findFirst({
+          where: eq(users.email, data.email),
+        });
+
+        return {
+          id: '1',
+          name: 'Test User',
+          email: 'test@test.com',
+        };
+      },
+    }),
+  ],
   // callbacks: {
   //   authorized({ auth, request: { nextUrl } }) {
   //     const isLoggedIn = !!auth?.user;

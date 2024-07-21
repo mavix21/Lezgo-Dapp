@@ -16,5 +16,5 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     sessionsTable: sessions,
     verificationTokensTable: verificationTokens,
   }),
-  providers: [Credentials({})],
+  session: { strategy: 'jwt' },
 });

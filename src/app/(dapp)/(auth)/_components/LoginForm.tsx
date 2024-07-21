@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { loginAction } from '@/app/(dapp)/(auth)/_actions';
 
 export function LoginForm() {
   const form = useForm<z.infer<typeof logInSchema>>({
@@ -25,10 +26,9 @@ export function LoginForm() {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof logInSchema>) => {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof logInSchema>) => {
+    const response = await loginAction(values);
+    console.log(response);
   };
 
   return (
