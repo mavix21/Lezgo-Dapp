@@ -25,7 +25,9 @@ const events = pgTable('event', {
   startDate: timestamp('start_date').notNull(),
   endDate: timestamp('end_date').notNull(),
   address: varchar('address', { length: 255 }).notNull(),
-  createdAt: timestamp('created_at').default(sql`now()`),
+  createdAt: timestamp('created_at')
+    .notNull()
+    .default(sql`now()`),
   updatedAt: timestamp('updated_at'),
 });
 

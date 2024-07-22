@@ -3,10 +3,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { logInSchema } from '../_lib/zod';
+import { registerSchema } from '../_lib/zod';
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -19,20 +20,21 @@ import { useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 
-export function LoginForm() {
+export function RegisterForm() {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const { toast } = useToast();
 
-  const form = useForm<z.infer<typeof logInSchema>>({
-    resolver: zodResolver(logInSchema),
+  const form = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       email: '',
       password: '',
+      username: '',
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof logInSchema>) => {
+  const onSubmit = async (values: z.infer<typeof registerSchema>) => {
     startTransition(async () => {
       const response = await loginAction(values);
       if (response.error) {
@@ -65,6 +67,25 @@ export function LoginForm() {
             </FormItem>
           )}
         />
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input type="text" {...field} />
+              </FormControl>
+              <FormDescription>
+                Your username will be displayed publicly
+              </FormDescription>
+              <div className="h-2">
+                <FormMessage />
+              </div>
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="password"

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk } from 'next/font/google';
 import '../globals.css';
+import { Toaster } from '@/components/ui/toaster';
 
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${spaceGrotesk.className} dark`}>
         <div className="min-h-svh">{children}</div>
+        <Toaster />
       </body>
     </html>
   );

@@ -4,6 +4,7 @@ import { logInSchema } from '@/app/(dapp)/(auth)/_lib/zod';
 import { db } from '@/server/db';
 import { eq } from 'drizzle-orm';
 import { users } from '@/server/db/schema';
+import bcrypt from 'bcryptjs';
 
 export const BASE_PATH = '/api/auth';
 
@@ -26,11 +27,14 @@ const config: NextAuthConfig = {
           where: eq(users.email, data.email),
         });
 
-        return {
-          id: '1',
-          name: 'Test User',
-          email: 'test@test.com',
-        };
+        if (!user || !user.password) {
+          throw new Error('Invalid credentials');
+        }
+
+        // verify password
+        const isValid = await bcrypt.compare(data.password, user.password);
+
+        return user;
       },
     }),
   ],
