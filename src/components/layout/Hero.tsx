@@ -8,7 +8,7 @@ export function Hero() {
         height={1280}
         src="/hero-large.jpg"
         alt="Event Banner"
-        className="object-cover min-h-[720px]"
+        className="hero-image | object-cover min-h-[720px]"
         priority
       />
 
