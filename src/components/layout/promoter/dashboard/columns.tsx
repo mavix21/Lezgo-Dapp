@@ -18,7 +18,8 @@ export const columns: ColumnDef<Event>[] = [
     },
     {
         accessorKey: "category",
-        header: "Category"
+        header: "Category",
+        meta: 'select',
     },
     {
         accessorKey: "startDate",
