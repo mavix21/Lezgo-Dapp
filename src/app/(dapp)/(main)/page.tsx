@@ -8,7 +8,7 @@ export default function HomePage() {
       <div className="grain"></div>
       <div className="h-full w-full blur-3xl absolute m-auto backdrop-brightness-75 mix-blend-exclusion -z-10" />
       <Hero />
-      <section className="mt-16 px-8">
+      <section className="pt-16 px-8">
         <div className="flex items-center justify-between">
           <h2 className="text-white text-2xl font-bold">
             Eventos recomendados

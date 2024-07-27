@@ -1,4 +1,4 @@
-import { IEventsRepository } from '../../_src/application/repositories';
+import { IEventsRepository } from '../../_src/application/repositories/events-repository.interface';
 
 export class EventsService {
   private _eventsRepository: IEventsRepository;

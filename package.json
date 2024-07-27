@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:https": "next dev --experimental-https",
     "dk": "drizzle-kit studio",
     "db:generate": "drizzle-kit generate --dialect postgresql --schema=./src/server/db/schema --out=./src/server/db/migrations",
     "db:migrate": "node src/server/db/migrate.ts",
@@ -41,6 +42,7 @@
     "date-fns": "^3.6.0",
     "drizzle-orm": "^0.32.0",
     "framer-motion": "^11.2.14",
+    "inversify": "^6.0.2",
     "lucide-react": "^0.401.0",
     "next": "^14.2.5",
     "next-auth": "5.0.0-beta.19",
@@ -49,6 +51,7 @@
     "react-day-picker": "^8.10.1",
     "react-dom": "^18",
     "react-hook-form": "^7.52.1",
+    "reflect-metadata": "^0.2.2",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",

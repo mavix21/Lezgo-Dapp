@@ -33,5 +33,10 @@ export const registerSchema = object({
       message: 'Passwords do not match',
       path: ['confirmPassword'],
     });
+    ctx.addIssue({
+      code: 'custom',
+      message: 'Passwords do not match',
+      path: ['password'],
+    });
   }
 });

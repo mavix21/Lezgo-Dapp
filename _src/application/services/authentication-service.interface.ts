@@ -1,7 +1,7 @@
 import { User } from '@/server/db/types';
 import { AdapterAccountType } from '@auth/core/adapters';
 
-export interface AuthenticationService {
+export interface IAuthenticationService {
   getUser(): Promise<User>;
 
   signInWithProvider(provider: AdapterAccountType): Promise<{ url: string }>;

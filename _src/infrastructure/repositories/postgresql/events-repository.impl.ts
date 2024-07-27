@@ -1,14 +1,12 @@
-import { IEventsRepository } from './index';
 import { db } from '@/server/db';
 import { events } from '@/server/db/schema';
-import type { Event, NewEvent } from '@/server/db/types';
+import { IEventsRepository } from '../../../application/repositories/events-repository.interface';
+import { Event, EventSchema, NewEvent } from '../../../entities/models/events';
+import { injectable } from 'inversify';
 
+@injectable()
 export class EventsRepository implements IEventsRepository {
-  private _db;
-
-  constructor() {
-    this._db = db;
-  }
+  constructor() {}
 
   public async createEvent({
     promoterId,
@@ -19,7 +17,7 @@ export class EventsRepository implements IEventsRepository {
     endDate,
     address,
   }: NewEvent) {
-    const [newEvent]: Event[] = await this._db
+    const [eventCreated]: Event[] = await db
       .insert(events)
       .values({
         promoterId,
@@ -32,10 +30,10 @@ export class EventsRepository implements IEventsRepository {
       })
       .returning();
 
-    if (!newEvent) {
+    if (!eventCreated) {
       throw new Error('Event not created', { cause: 'unknown' });
     }
 
-    return newEvent;
+    return EventSchema.parse(eventCreated);
   }
 }
