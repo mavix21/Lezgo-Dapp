@@ -12,8 +12,6 @@ function useProgramMetadata(source: string) {
       .then((response) => response.text())
       .then((metaRaw) => setMetadata(ProgramMetadata.from(`0x${metaRaw}`)))
       .catch(({ message }: Error) => alert.error(message));
-
-    // eslint-disable-next-line react-_hooks/exhaustive-deps
   }, []);
 
   return metadata;
