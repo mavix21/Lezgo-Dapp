@@ -30,6 +30,9 @@
       "@/*": [
         "./src/*"
       ],
+      "@/app/*": [
+        "./app/*"
+      ],
       "@/server/db/schema/*": [
         "./src/server/db/schema/*"
       ]

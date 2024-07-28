@@ -1,8 +1,17 @@
-import { webpack } from 'next/dist/compiled/webpack/webpack';
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack(config, { isServer }) {
+  webpack(config, { isServer, webpack }) {
+    // Inversify
+    if (isServer) {
+      config.plugins.push(
+        new webpack.BannerPlugin({
+          banner: 'require("reflect-metadata");',
+          raw: true,
+          entryOnly: true
+        })
+      );
+    }
+
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.('.svg')
@@ -23,18 +32,6 @@ const nextConfig = {
         use: ['@svgr/webpack']
       }
     );
-
-    // Inversify
-    if (isServer) {
-      config.plugins.push(
-        new webpack.BannerPlugin({
-          banner: 'require("reflect-metadata");',
-          raw: true,
-          entryOnly: true
-        })
-      );
-    }
-
     // Modify the file loader rule to ignore *.svg, since we have it handled now.
     fileLoaderRule.exclude = /\.svg$/i;
 
