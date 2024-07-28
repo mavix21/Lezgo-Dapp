@@ -16,7 +16,7 @@ import { clsx } from 'clsx';
 import styles from './menu-handler.module.css';
 import { Button } from '@gear-js/vara-ui';
 import dynamic from 'next/dynamic';
-import { withProviders } from '@/app/hocs';
+import { withProviders } from '../../../../../_hocs';
 
 // const MenuOptions = dynamic(
 //   () => import('../menu-options').then((mod) => mod.MenuOptions),

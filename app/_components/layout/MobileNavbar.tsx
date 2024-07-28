@@ -8,7 +8,7 @@ import { NavItems } from '@/app/_components/layout/NavItems';
 
 export function MobileNavbar() {
   return (
-    <Drawer direction="right">
+    <Drawer direction="left">
       <DrawerTrigger>
         <MenuIcon />
       </DrawerTrigger>
