@@ -4,14 +4,16 @@ import { Logo } from '@/app/_components/layout/Logo';
 import { Skeleton } from '@/app/_components/ui/skeleton';
 import { auth } from '@/auth';
 import { SignOutButton } from '@/app/_components/auth/SignOutButton';
+import Link from 'next/link';
+import { buttonVariants } from '@/app/_components/ui/button';
 
-const MenuHandler = dynamic(
-  () => import('@/app/_vendor/gear/ui/components/menu-handler/menu-handler'),
-  {
-    ssr: false,
-    loading: () => <Skeleton className="h-10 w-[135px] rounded-md" />,
-  },
-);
+// const MenuHandler = dynamic(
+//   () => import('@/app/_vendor/gear/ui/components/menu-handler/menu-handler'),
+//   {
+//     ssr: false,
+//     loading: () => <Skeleton className="h-10 w-[135px] rounded-md" />,
+//   },
+// );
 
 export async function Header() {
   const session = await auth();
@@ -21,9 +23,18 @@ export async function Header() {
       <div className="grid items-center grid-cols-[1fr,1fr,auto] p-4">
         <NavbarHandler />
         <Logo />
-        <div className="min-w-[135px]">
+        <div>
           {/*<MenuHandler />*/}
-          {session ? <SignOutButton /> : <p>Log In</p>}
+          {session ? (
+            <SignOutButton />
+          ) : (
+            <Link
+              href="/login"
+              className={buttonVariants({ variant: 'default' })}
+            >
+              Click here
+            </Link>
+          )}
         </div>
       </div>
     </header>

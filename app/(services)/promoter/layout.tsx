@@ -1,6 +1,6 @@
 import { Sidebar } from '@/app/_components/layout/promoter/Sidebar';
-import { Button } from '@/components/ui/button';
-import { Toaster } from '@/components/ui/sonner';
+import { Button } from '@/app/_components/ui/button';
+import { Toaster } from '@/app/_components/ui/sonner';
 import { Search, User } from 'lucide-react';
 import type { Metadata } from 'next';
 import Image from 'next/image';

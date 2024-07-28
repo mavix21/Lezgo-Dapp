@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { File, ListFilter } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/app/_components/ui/button';
 import {
   Card,
   CardContent,
@@ -9,9 +9,14 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+} from '@/app/_components/ui/card';
+import { Progress } from '@/app/_components/ui/progress';
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@/app/_components/ui/tabs';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -19,7 +24,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from '@/app/_components/ui/dropdown-menu';
 import { getEvents } from '@/app/_actions/get-events';
 import {
   columns,

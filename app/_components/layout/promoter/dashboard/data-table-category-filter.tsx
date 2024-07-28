@@ -1,20 +1,20 @@
 'use client';
 import { getEventCategories } from '@/app/_actions/get-event-categories';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/app/_components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from '@/app/_components/ui/dropdown-menu';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/app/_components/ui/select';
 import { useEventCategories } from '@/app/_hooks/use-event-categories';
 import { db } from '@/server/db';
 import { eventCategories } from '@/server/db/schema';
