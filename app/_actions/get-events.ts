@@ -3,7 +3,7 @@ import { eventCategories, events } from '@/server/db/schema';
 import { eq } from 'drizzle-orm';
 
 export async function getEvents() {
-  const ctg = await db.select().from(eventCategories).as('ctg');
+  const ctg = db.select().from(eventCategories).as('ctg');
   const _events = await db
     .select({
       id: events.id,
