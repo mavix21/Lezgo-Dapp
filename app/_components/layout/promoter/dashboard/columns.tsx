@@ -1,6 +1,8 @@
 'use client';
 
-import { Button } from '@/app/_components/ui/button';
+import { ColumnDef } from '@tanstack/react-table';
+import { ActionsMenu } from './actions';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/app/_components/ui/dropdown-menu';
-import { ColumnDef } from '@tanstack/react-table';
+import { Button } from '@/app/_components/ui/button';
 import { MoreHorizontal } from 'lucide-react';
 
 export type Event = {
@@ -69,29 +71,7 @@ export const columns: ColumnDef<Event>[] = [
   {
     id: 'actions',
     cell: ({ row }) => {
-      const payment = row.original;
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Edit
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-destructive">
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
+      return <ActionsMenu com={row.original.id} />;
     },
   }, // {
   //     accessorKey: "status",
