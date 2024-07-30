@@ -22,15 +22,13 @@ export async function postEventCategories({
   end_date,
   address,
 }: Props) {
-  const insEventCategories = await db
-    .insert(events)
-    .values({
-      promoterId: promoter_id,
-      eventCategoryId: event_category_id,
-      name: name,
-      description: description,
-      startDate: start_date,
-      endDate: end_date,
-      address: address,
-    });
+  const insEventCategories = await db.insert(events).values({
+    promoterId: promoter_id,
+    eventCategoryId: event_category_id,
+    name: name,
+    description: description,
+    startDate: start_date,
+    endDate: end_date,
+    address: address,
+  });
 }
