@@ -1,5 +1,4 @@
 import { Sidebar } from '@/app/_components/layout/promoter/Sidebar';
-import { Button } from '@/components/ui/button';
 import { Search, User } from 'lucide-react';
 import type { Metadata } from 'next';
 import Image from 'next/image';

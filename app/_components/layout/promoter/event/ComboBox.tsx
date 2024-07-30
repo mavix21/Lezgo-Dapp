@@ -1,6 +1,6 @@
 'use server'
-import { FormControl, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/app/_components/ui/select";
 import { db } from "@/server/db";
 import { eventCategories } from "@/server/db/schema";
 import { ControllerRenderProps } from "react-hook-form";
