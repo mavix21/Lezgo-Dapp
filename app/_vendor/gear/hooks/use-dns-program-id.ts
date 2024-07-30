@@ -1,7 +1,7 @@
 import {
   DefaultDnsValueName,
   DnsContext,
-} from '@/app/vendor/gear/providers/dns-provider';
+} from '@/app/_vendor/gear/providers/dns-provider';
 import { useContext } from 'react';
 import { HexString } from '@gear-js/api';
 
