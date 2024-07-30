@@ -1,4 +1,4 @@
-export { default as users } from './users';
+export { default as users, userRelations } from './users';
 export { default as events, eventRelations } from './events';
 export { default as promoters, promoterRelations } from './promoters';
 export { default as eventCategories } from './event-categories';

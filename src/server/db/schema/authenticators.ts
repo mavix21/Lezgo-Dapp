@@ -6,7 +6,7 @@ import {
   text,
   uuid,
 } from 'drizzle-orm/pg-core';
-import users from '@/server/db/schema/users';
+import { users } from '.';
 
 const authenticators = pgTable(
   'authenticator',

@@ -20,7 +20,7 @@ const main = async () => {
       migrationsFolder: 'src/server/db/migrations',
     });
 
-    console.log('Migration successful');
+    console.log('Migration successful 🤪');
   } catch (err) {
     console.error('Migration failed', err);
     process.exit(1);
