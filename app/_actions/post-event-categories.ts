@@ -4,7 +4,7 @@ import { db } from '@/server/db';
 import { events } from '@/server/db/schema';
 
 interface Props {
-  promoter_id: number;
+  user_id: string;
   event_category_id: number;
   name: string;
   description: string;
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export async function postEventCategories({
-  promoter_id,
+  user_id,
   event_category_id,
   name,
   description,
@@ -23,7 +23,7 @@ export async function postEventCategories({
   address,
 }: Props) {
   const insEventCategories = await db.insert(events).values({
-    promoterId: promoter_id,
+    userId: user_id,
     eventCategoryId: event_category_id,
     name: name,
     description: description,

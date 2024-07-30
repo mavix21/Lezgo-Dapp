@@ -95,7 +95,7 @@ export default function EventCreationForm() {
       console.log('Calling insEvent...');
 
       await insEvent({
-        promoter_id: 2,
+        user_id: '956c4961-6635-4698-a139-1a93e93e2891',
         event_category_id: parseInt(values.category, 10),
         name: values.name,
         description: values.description,

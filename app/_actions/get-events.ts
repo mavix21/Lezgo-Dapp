@@ -13,7 +13,7 @@ export async function getEvents() {
       category: ctg.name,
     })
     .from(events)
-    .where(eq(events.promoterId, 2))
+    .where(eq(events.userId, '956c4961-6635-4698-a139-1a93e93e2891'))
     .innerJoin(ctg, eq(events.eventCategoryId, ctg.id));
   //console.log(_events);
   return _events;

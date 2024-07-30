@@ -3,7 +3,7 @@ import { postEventCategories } from '@/app/_actions/post-event-categories';
 import React from 'react';
 
 interface Props {
-  promoter_id: number;
+  user_id: string;
   event_category_id: number;
   name: string;
   description: string;
