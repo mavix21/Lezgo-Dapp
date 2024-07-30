@@ -29,6 +29,13 @@
       "when": 1722312089753,
       "tag": "0003_far_chat",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1722353527836,
+      "tag": "0004_rapid_black_knight",
+      "breakpoints": true
     }
   ]
 }

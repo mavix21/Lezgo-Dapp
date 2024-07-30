@@ -38,7 +38,7 @@ const events = pgTable('event', {
     .notNull()
     .references(() => eventCategories.id),
   eventModality: eventModality('event_modality').notNull().default('in_person'),
-  eventPlatform: eventPlatform('event_platform').notNull().default('other'),
+  eventPlatform: eventPlatform('event_platform'),
   totalTickets: integer('total_tickets').notNull().default(0),
   name: varchar('name', { length: 50 }).notNull(),
   description: text('description').notNull(),

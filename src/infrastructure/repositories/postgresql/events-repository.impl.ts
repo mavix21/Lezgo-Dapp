@@ -9,24 +9,28 @@ export class EventsRepository implements IEventsRepository {
   constructor() {}
 
   public async createEvent({
-    promoterId,
+    userId,
     eventCategoryId,
     name,
     description,
     startDate,
     endDate,
     address,
+    eventModality,
+    eventPlatform,
   }: NewEvent) {
     const [eventCreated]: Event[] = await db
       .insert(events)
       .values({
-        promoterId,
+        userId,
         eventCategoryId,
         name,
         description,
         startDate,
         endDate,
         address,
+        eventModality,
+        eventPlatform,
       })
       .returning();
 
