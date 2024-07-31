@@ -4,19 +4,14 @@ import React, { useEffect, useState } from 'react';
 import { getEventById } from '../_actions/get-event-by-id';
 
 interface Props {
-  user_id: string;
-  event_category_id: number;
+  userId: string;
+  eventCategoryId: number;
   name: string;
   description: string;
-  start_date: Date;
-  end_date: Date;
+  startDate: Date;
+  endDate: Date;
   address: string;
-}
-
-interface EventById {
-  id: string;
-  name: string;
-  description: string;
+  createdAt: Date;
 }
 
 export async function insEvent(params: Props) {

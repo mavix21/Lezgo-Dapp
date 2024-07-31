@@ -1,5 +1,4 @@
 'use client';
-import { postEventCategories } from '@/app/_actions/post-event-categories';
 import React, { useEffect, useState } from 'react';
 import { getEventById } from '../_actions/get-event-by-id';
 

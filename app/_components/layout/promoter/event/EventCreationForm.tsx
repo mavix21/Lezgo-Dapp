@@ -2,6 +2,7 @@
 
 import { Button } from '@/app/_components/ui/button';
 import { Calendar } from '@/app/_components/ui/calendar';
+import { DateTimePicker } from '@/app/_components/ui/datetimepicker';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/app/_components/ui/form';
 import { Input } from '@/app/_components/ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from '@/app/_components/ui/popover';
@@ -24,6 +25,7 @@ import {
   CircleX,
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -47,6 +49,8 @@ interface Props {
 export default function EventCreationForm() {
   const { categories, loading } = useEventCategories();
   const { currentStep, setCurrentStep, setPreviousStep, delta } = useSteps();
+  const [date, setDate] = React.useState<Date | undefined>(undefined);
+
   const router = useRouter();
 
   // 1. Define your form.
@@ -95,13 +99,14 @@ export default function EventCreationForm() {
       console.log('Calling insEvent...');
 
       await insEvent({
-        user_id: '956c4961-6635-4698-a139-1a93e93e2891',
-        event_category_id: parseInt(values.category, 10),
+        userId: '956c4961-6635-4698-a139-1a93e93e2891',
+        eventCategoryId: parseInt(values.category, 10),
         name: values.name,
         description: values.description,
-        start_date: values.start_date,
-        end_date: values.end_date,
+        startDate: values.start_date,
+        endDate: values.end_date,
         address: values.address,
+        createdAt: new Date(),
       });
 
       toast.success('Event has been created successfully.', {
@@ -206,7 +211,7 @@ export default function EventCreationForm() {
                   render={({ field }) => (
                     <FormItem className="flex flex-col">
                       <FormLabel>Start date</FormLabel>
-                      <Popover>
+                      {/* <Popover>
                         <PopoverTrigger asChild>
                           <FormControl>
                             <Button
@@ -236,7 +241,8 @@ export default function EventCreationForm() {
                             initialFocus
                           />
                         </PopoverContent>
-                      </Popover>
+                      </Popover> */}
+                      <DateTimePicker granularity="minute" value={field.value} onChange={field.onChange} />
                       <FormMessage />
                     </FormItem>
                   )}
