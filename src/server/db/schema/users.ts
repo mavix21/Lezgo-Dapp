@@ -1,6 +1,6 @@
 import { relations, sql } from 'drizzle-orm';
 import { pgTable, text, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
-import { events } from '.';
+import { events, promoters } from '.';
 
 const users = pgTable('user', {
   id: uuid('id')
@@ -18,6 +18,7 @@ const users = pgTable('user', {
 
 export default users;
 
-export const userRelations = relations(users, ({ many }) => ({
+export const userRelations = relations(users, ({ one, many }) => ({
   events: many(events),
+  promoter: one(promoters),
 }));

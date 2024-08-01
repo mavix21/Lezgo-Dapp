@@ -8,7 +8,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 import { relations, sql } from 'drizzle-orm';
-import { eventCategories } from '.';
+import { eventCategories, eventTickets } from '.';
 import users from '@/server/db/schema/users';
 
 export const eventModality = pgEnum('event_modality', [
@@ -53,7 +53,7 @@ const events = pgTable('event', {
 
 export default events;
 
-export const eventRelations = relations(events, ({ one }) => ({
+export const eventRelations = relations(events, ({ one, many }) => ({
   user: one(users, {
     fields: [events.userId],
     references: [users.id],
@@ -62,4 +62,5 @@ export const eventRelations = relations(events, ({ one }) => ({
     fields: [events.eventCategoryId],
     references: [eventCategories.id],
   }),
+  tickets: many(eventTickets),
 }));
