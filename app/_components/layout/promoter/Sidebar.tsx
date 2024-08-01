@@ -9,6 +9,13 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { SiderMenuItem } from './SiderMenuItem';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/app/_components/ui/card';
 
 const menuItems = [
   {
@@ -27,11 +34,7 @@ const menuItems = [
 
 export const Sidebar = () => {
   return (
-    <div
-      id="menu"
-      style={{ width: '300px' }}
-      className="flex max-h-screen flex-col gap-2 bg-card text-foreground"
-    >
+    <div id="menu" className="flex h-full max-h-screen flex-col gap-2">
       <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
         <Link href="/public" className="flex items-center gap-2 font-semibold">
           <Package2 className="h-6 w-6" />
@@ -42,13 +45,30 @@ export const Sidebar = () => {
           <span className="sr-only">Toggle notifications</span>
         </Button>
       </div>
-      <div
-        id="nav"
-        className="grid items-start px-2 text-sm font-medium lg:px-4"
-      >
-        {menuItems.map((item) => (
-          <SiderMenuItem key={item.path} {...item} />
-        ))}
+      <div className="flex-1">
+        <nav
+          id="nav"
+          className="grid items-start px-2 text-sm font-medium lg:px-4"
+        >
+          {menuItems.map((item) => (
+            <SiderMenuItem key={item.path} {...item} />
+          ))}
+        </nav>
+      </div>
+      <div className="mt-auto p-4">
+        <Card x-chunk="dashboard-02-chunk-0">
+          <CardHeader className="p-2 pt-0 md:p-4">
+            <CardTitle>Upgrade to Pro</CardTitle>
+            <CardDescription>
+              Unlock all features and get unlimited access to our support team.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
+            <Button size="sm" className="w-full">
+              Upgrade
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
