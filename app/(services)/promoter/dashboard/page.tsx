@@ -26,10 +26,7 @@ import {
   DropdownMenuTrigger,
 } from '@/app/_components/ui/dropdown-menu';
 import { getEvents } from '@/app/_actions/get-events';
-import {
-  columns,
-  Event,
-} from '@/app/_components/layout/promoter/dashboard/columns';
+import { columns } from '@/app/_components/layout/promoter/dashboard/columns';
 import { DataTable } from '@/app/_components/layout/promoter/dashboard/data-table';
 import { getEventCategories } from '@/app/_actions/get-event-categories';
 
@@ -37,8 +34,9 @@ export default async function Home() {
   //const data = await getData()
   const data = await getEvents();
   const categories = await getEventCategories();
+
   return (
-    <main className="bg-background text-foreground flex-1 items-start gap-4 p-4 sm:px-6 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
+    <div className="bg-muted/60 text-foreground flex-1 items-start gap-4 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
       <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
           <Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-0">
@@ -131,6 +129,6 @@ export default async function Home() {
           </TabsContent>
         </Tabs>
       </div>
-    </main>
+    </div>
   );
 }

@@ -25,7 +25,7 @@ const menuItems = [
     subTitle: 'Visualization',
   },
   {
-    path: '/promoter/event',
+    path: '/promoter/dashboard/create-event',
     icon: <Ticket className="h-4 w-4" />,
     title: 'Events',
     subTitle: 'Contador Client Side',

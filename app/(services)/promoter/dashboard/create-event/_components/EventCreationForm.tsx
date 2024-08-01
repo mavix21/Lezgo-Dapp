@@ -3,11 +3,28 @@
 import { Button } from '@/app/_components/ui/button';
 import { Calendar } from '@/app/_components/ui/calendar';
 import { DateTimePicker } from '@/app/_components/ui/datetimepicker';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/app/_components/ui/form';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/app/_components/ui/form';
 import { Input } from '@/app/_components/ui/input';
-import { Popover, PopoverContent, PopoverTrigger } from '@/app/_components/ui/popover';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/app/_components/ui/select';
-import { steps } from '@/app/_constants/consts';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/app/_components/ui/popover';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/app/_components/ui/select';
 import { useSteps } from '@/app/_context/ctx-event-steps';
 import { insEvent } from '@/app/_hooks/use-event';
 import { useEventCategories } from '@/app/_hooks/use-event-categories';
@@ -29,6 +46,7 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
+import { CREATE_EVENT_STEPS } from '@/app/(services)/promoter/dashboard/_constants';
 
 const processForm: SubmitHandler<Inputs> = (data) => {
   console.log(data);
@@ -74,13 +92,13 @@ export default function EventCreationForm() {
   //const trigger = form.trigger;
 
   const next = async () => {
-    const fields = steps[currentStep].fields;
+    const fields = CREATE_EVENT_STEPS[currentStep].fields;
     const output = await trigger(fields as FieldName[], { shouldFocus: true });
     // const output = await form.trigger(fields as FieldName[], { shouldFocus: true })
 
     if (!output) return;
 
-    if (currentStep < steps.length - 1) {
+    if (currentStep < CREATE_EVENT_STEPS.length - 1) {
       setPreviousStep(currentStep);
       setCurrentStep((step) => step + 1);
     }
@@ -242,7 +260,11 @@ export default function EventCreationForm() {
                           />
                         </PopoverContent>
                       </Popover> */}
-                      <DateTimePicker granularity="minute" value={field.value} onChange={field.onChange} />
+                      <DateTimePicker
+                        granularity="minute"
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
                       <FormMessage />
                     </FormItem>
                   )}
@@ -370,7 +392,7 @@ export default function EventCreationForm() {
           </Button>
           <Button
             size="icon"
-            disabled={currentStep === steps.length - 1}
+            disabled={currentStep === CREATE_EVENT_STEPS.length - 1}
             onClick={next}
           >
             <ChevronRight className="h-4 w-4" />
