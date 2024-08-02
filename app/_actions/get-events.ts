@@ -10,6 +10,7 @@ export async function getEvents() {
       name: events.name,
       startDate: events.startDate,
       endDate: events.endDate,
+      createdAt: events.createdAt,
       category: ctg.name,
     })
     .from(events)

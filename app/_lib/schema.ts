@@ -1,10 +1,10 @@
 import { z } from 'zod';
 
 const entrySchema = z.object({
-  ticket_name: z.string().min(2, {
+  name: z.string().min(2, {
     message: 'Ticket name must be at least 2 characters.',
   }),
-  quantity: z.coerce.number(),
+  number_of_tickets: z.coerce.number(),
   price: z.coerce.number(),
 });
 
@@ -34,6 +34,7 @@ export const formSchema = z.object({
     required_error: 'End date is required.',
   }),
   //entries: z.array(entrySchema),
+  entries: z.array(entrySchema),
 });
 
 // export const formSchema = z.object({

@@ -88,6 +88,11 @@ export default function EventCreationForm() {
       start_date: undefined,
       end_date: undefined,
       //entries: [{ ticket_name: "", quantity: 1, price: 0 }]
+      entries: [{
+        name: '',
+        number_of_tickets: 0.00,
+        price: 0,
+      }]
     },
   });
 

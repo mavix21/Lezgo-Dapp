@@ -19,6 +19,7 @@ export type Event = {
   name: string;
   startDate: Date;
   endDate: Date;
+  createdAt: Date;
   category: string;
   //status: "confirmed" | "cancelled"
 };
@@ -67,7 +68,23 @@ export const columns: ColumnDef<Event>[] = [
       return <div>{formatted}</div>;
     },
   },
+  {
+    accessorKey: 'createdAt',
+    header: 'Created At',
+    cell: ({ row }) => {
+      const date = new Date(row.getValue('endDate'));
+      const formatted = new Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true, // Set to false if you prefer 24-hour format
+      }).format(date);
 
+      return <div>{formatted}</div>;
+    },
+  },
   {
     id: 'actions',
     cell: ({ row }) => {
