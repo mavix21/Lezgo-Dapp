@@ -49,7 +49,7 @@ export default async function Home() {
             </CardHeader>
             <CardFooter>
               <Button asChild>
-                <Link href={'/promoter/event'}>Create New Event</Link>
+                <Link href={'/promoter/dashboard/create-event'}>Create New Event</Link>
               </Button>
             </CardFooter>
           </Card>

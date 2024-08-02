@@ -40,13 +40,16 @@ import {
   ChevronRight,
   CircleCheck,
   CircleX,
+  PlusIcon,
+  TrashIcon,
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { CREATE_EVENT_STEPS } from '@/app/(services)/promoter/dashboard/_constants';
+import { Label } from '@/app/_components/ui/label';
 
 const processForm: SubmitHandler<Inputs> = (data) => {
   console.log(data);
@@ -67,7 +70,7 @@ interface Props {
 export default function EventCreationForm() {
   const { categories, loading } = useEventCategories();
   const { currentStep, setCurrentStep, setPreviousStep, delta } = useSteps();
-  const [date, setDate] = React.useState<Date | undefined>(undefined);
+  const [entries, setEntries] = useState([{ id: 1 }]);
 
   const router = useRouter();
 
@@ -91,6 +94,7 @@ export default function EventCreationForm() {
   const { trigger } = form;
   //const trigger = form.trigger;
 
+  //Steps
   const next = async () => {
     const fields = CREATE_EVENT_STEPS[currentStep].fields;
     const output = await trigger(fields as FieldName[], { shouldFocus: true });
@@ -110,6 +114,16 @@ export default function EventCreationForm() {
       setCurrentStep((step) => step - 1);
     }
   };
+
+  //Tickets
+  const addEntry = () => {
+    setEntries([...entries, { id: entries.length + 1 }])
+  }
+  const removeLastEntry = () => {
+    if (entries.length > 1) {
+      setEntries(entries.slice(0, entries.length - 1))
+    }
+  }
 
   // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -149,7 +163,8 @@ export default function EventCreationForm() {
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          {currentStep === 0 && (
+          {/* <form > */}
+          {currentStep === 2 && (
             <motion.div
               initial={{ x: delta >= 0 ? '50%' : '-50%', opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -229,37 +244,6 @@ export default function EventCreationForm() {
                   render={({ field }) => (
                     <FormItem className="flex flex-col">
                       <FormLabel>Start date</FormLabel>
-                      {/* <Popover>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant={'outline'}
-                              className={cn(
-                                'w-[240px] pl-3 text-left font-normal',
-                                !field.value && 'text-muted-foreground',
-                              )}
-                            >
-                              {field.value ? (
-                                format(field.value, 'PPP')
-                              ) : (
-                                <span>Pick a date</span>
-                              )}
-                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                          <Calendar
-                            mode="single"
-                            selected={field.value}
-                            onSelect={field.onChange}
-                            // disabled={(date) =>
-                            //   date > new Date() || date < new Date("1900-01-01")
-                            // }
-                            initialFocus
-                          />
-                        </PopoverContent>
-                      </Popover> */}
                       <DateTimePicker
                         granularity="minute"
                         value={field.value}
@@ -275,37 +259,11 @@ export default function EventCreationForm() {
                   render={({ field }) => (
                     <FormItem className="flex flex-col">
                       <FormLabel>End date</FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant={'outline'}
-                              className={cn(
-                                'w-[240px] pl-3 text-left font-normal',
-                                !field.value && 'text-muted-foreground',
-                              )}
-                            >
-                              {field.value ? (
-                                format(field.value, 'PPP')
-                              ) : (
-                                <span>Pick a date</span>
-                              )}
-                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                          <Calendar
-                            mode="single"
-                            selected={field.value}
-                            onSelect={field.onChange}
-                            // disabled={(date) =>
-                            //   date > new Date() || date < new Date("1900-01-01")
-                            // }
-                            initialFocus
-                          />
-                        </PopoverContent>
-                      </Popover>
+                      <DateTimePicker
+                        granularity="minute"
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
                       <FormMessage />
                     </FormItem>
                   )}
@@ -379,6 +337,55 @@ export default function EventCreationForm() {
                   </FormItem>
                 )}
               />
+
+            </motion.div>
+          )}
+
+          {currentStep === 0 && (
+            <motion.div
+              initial={{ x: delta >= 0 ? '20%' : '-20%', opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              className="space-y-8"
+            >
+              {entries.map((entry) => (
+                <div key={entry.id} className="grid grid-cols-3 gap-4 mt-4">
+                  <div className="space-y-2">
+                    <Label htmlFor={`nombre-${entry.id}`}>Nombre de la entrada *</Label>
+                    <Input id={`nombre-${entry.id}`} placeholder="Ej. Gratis, VIP, Preventa" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor={`cantidad-${entry.id}`}>Cantidad Disponible</Label>
+                    <Input id={`cantidad-${entry.id}`} placeholder="0" type="number" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor={`precio-${entry.id}`}>Precio</Label>
+                    <div className="flex items-center">
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Moneda" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="PEN">S/.</SelectItem>
+                          <SelectItem value="USD">$</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <Input id={`precio-${entry.id}`} placeholder="0.00" type="number" step="0.01" className="ml-2" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+              <div className="flex justify-end mt-4">
+                <Button type="button" variant="default" onClick={addEntry}>
+                  <PlusIcon className="mr-2" />
+                  Agregar entrada
+                </Button>
+                <Button type="button" variant="destructive" onClick={removeLastEntry} className="ml-2">
+                  <TrashIcon className="mr-2" />
+                  Eliminar última entrada
+                </Button>
+              </div>
+              <div className="mt-6 space-y-2"></div>
               <Button type="submit">Submit</Button>
             </motion.div>
           )}
