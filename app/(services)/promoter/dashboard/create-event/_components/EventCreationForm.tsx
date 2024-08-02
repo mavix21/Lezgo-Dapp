@@ -164,7 +164,7 @@ export default function EventCreationForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           {/* <form > */}
-          {currentStep === 2 && (
+          {currentStep === 0 && (
             <motion.div
               initial={{ x: delta >= 0 ? '50%' : '-50%', opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -341,7 +341,7 @@ export default function EventCreationForm() {
             </motion.div>
           )}
 
-          {currentStep === 0 && (
+          {currentStep === 2 && (
             <motion.div
               initial={{ x: delta >= 0 ? '20%' : '-20%', opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
