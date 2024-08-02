@@ -43,6 +43,13 @@
       "when": 1722553400485,
       "tag": "0005_warm_miracleman",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1722612631129,
+      "tag": "0006_melodic_purple_man",
+      "breakpoints": true
     }
   ]
 }
