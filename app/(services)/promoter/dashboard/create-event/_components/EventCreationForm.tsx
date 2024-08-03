@@ -50,6 +50,7 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 import { CREATE_EVENT_STEPS } from '@/app/(services)/promoter/dashboard/_constants';
 import { Label } from '@/app/_components/ui/label';
+import { insEventTickets } from '@/app/_hooks/use-event-tickets';
 
 const processForm: SubmitHandler<Inputs> = (data) => {
   console.log(data);
@@ -141,8 +142,19 @@ export default function EventCreationForm() {
         createdAt: new Date(),
       });
       //console.log(eventId, values);
+      const tickets = values.entries;
 
-      
+      tickets.map(
+        async (ticket, index) => (
+          await insEventTickets({
+            eventTicketId: index + 1,
+            eventId: eventId[0].insertedId,
+            currencyId: 'PEN',
+            name: ticket.name,
+            numberOfTickets: ticket.number_of_tickets,
+            ticketPrice: ticket.price.toString(),
+          })
+        ))
 
       toast.success('Event has been created successfully.', {
         icon: <CircleCheck />,
