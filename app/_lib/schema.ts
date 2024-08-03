@@ -5,6 +5,7 @@ const entrySchema = z.object({
     message: 'Ticket name must be at least 2 characters.',
   }),
   number_of_tickets: z.coerce.number(),
+  // symbol: z.string(),
   price: z.coerce.number(),
 });
 

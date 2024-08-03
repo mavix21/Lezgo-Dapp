@@ -45,7 +45,7 @@ import {
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { CREATE_EVENT_STEPS } from '@/app/(services)/promoter/dashboard/_constants';
@@ -56,16 +56,6 @@ const processForm: SubmitHandler<Inputs> = (data) => {
 };
 
 type Inputs = z.infer<typeof formSchema>;
-
-interface Props {
-  promoter_id: number;
-  event_category_id: number;
-  name: string;
-  description: string;
-  start_date: Date;
-  end_date: Date;
-  address: string;
-}
 
 export default function EventCreationForm() {
   const { categories, loading } = useEventCategories();
@@ -87,14 +77,19 @@ export default function EventCreationForm() {
       reference: '',
       start_date: undefined,
       end_date: undefined,
-      //entries: [{ ticket_name: "", quantity: 1, price: 0 }]
       entries: [{
         name: '',
         number_of_tickets: 0.00,
+        // symbol: '',
         price: 0,
       }]
     },
   });
+
+  const { fields, append, remove } = useFieldArray({
+    name: "entries",
+    control: form.control,
+  })
 
   const { trigger } = form;
   //const trigger = form.trigger;
@@ -135,7 +130,7 @@ export default function EventCreationForm() {
     try {
       console.log('Calling insEvent...');
 
-      await insEvent({
+      const eventId = await insEvent({
         userId: '956c4961-6635-4698-a139-1a93e93e2891',
         eventCategoryId: parseInt(values.category, 10),
         name: values.name,
@@ -145,6 +140,7 @@ export default function EventCreationForm() {
         address: values.address,
         createdAt: new Date(),
       });
+      console.log(eventId, values);
 
       toast.success('Event has been created successfully.', {
         icon: <CircleCheck />,
@@ -353,7 +349,63 @@ export default function EventCreationForm() {
               transition={{ duration: 0.3, ease: 'easeInOut' }}
               className="space-y-8"
             >
-              {entries.map((entry) => (
+              {
+                fields.map((field, index) => {
+                  return (
+                    <div key={field.id} className="grid grid-cols-3 gap-4 mt-4">
+                      <div className="space-y-2">
+                        <Label htmlFor={`entries-${index}`}>Nombre de la entrada</Label>
+                        <Input id={`entries-${index}`} placeholder="Ej. Gratis, VIP, Preventa"
+                          {...form.register(`entries.${index}.name` as const, {
+                            required: true
+                          })}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor={`entries-${index}`}>Cantidad Disponible</Label>
+                        <Input id={`entries-${index}`} placeholder="0" type="number"
+                          {...form.register(`entries.${index}.number_of_tickets` as const, {
+                            valueAsNumber: true,
+                            required: true
+                          })}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor={`entries-${index}`}>Precio</Label>
+                        <div className="flex items-center">
+                          <Select>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Moneda" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="PEN">S/.</SelectItem>
+                              <SelectItem value="USD">$</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <Input id={`entries-${index}`} placeholder="0.00" type="number" step="0.01" className="ml-2"
+                            {...form.register(`entries.${index}.price` as const, {
+                              valueAsNumber: true,
+                              required: true
+                            })}
+                          />
+                          <Button type="button" variant="destructive" onClick={() => remove(index)} className="ml-2"
+                            disabled={index === 0}>
+                            <TrashIcon />
+                          </Button>
+                        </div>
+                      </div>
+                      {/* <div className="space-y-2">
+                        <Button type="button" variant="destructive" onClick={() => remove(index)}>
+                          <TrashIcon className="mr-2" />
+                        </Button>
+                      </div> */}
+                    </div>
+                  )
+                })
+              }
+
+
+              {/* {entries.map((entry) => (
                 <div key={entry.id} className="grid grid-cols-3 gap-4 mt-4">
                   <div className="space-y-2">
                     <Label htmlFor={`nombre-${entry.id}`}>Nombre de la entrada *</Label>
@@ -379,16 +431,22 @@ export default function EventCreationForm() {
                     </div>
                   </div>
                 </div>
-              ))}
+              ))}*/}
               <div className="flex justify-end mt-4">
-                <Button type="button" variant="default" onClick={addEntry}>
+                <Button type="button" variant="default" onClick={() =>
+                  append({
+                    name: '',
+                    number_of_tickets: 0,
+                    price: 0.00,
+                  })
+                }>
                   <PlusIcon className="mr-2" />
                   Agregar entrada
                 </Button>
-                <Button type="button" variant="destructive" onClick={removeLastEntry} className="ml-2">
+                {/* <Button type="button" variant="destructive" onClick={removeLastEntry} className="ml-2">
                   <TrashIcon className="mr-2" />
                   Eliminar última entrada
-                </Button>
+                </Button> */}
               </div>
               <div className="mt-6 space-y-2"></div>
               <Button type="submit">Submit</Button>
