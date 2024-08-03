@@ -1,7 +1,7 @@
 'use server';
-import { postEventCategories } from '@/app/_actions/post-event-categories';
 import React, { useEffect, useState } from 'react';
 import { getEventById } from '../_actions/get-event-by-id';
+import { postEvent } from '../_actions/post-event';
 
 interface Props {
   userId: string;
@@ -16,7 +16,7 @@ interface Props {
 
 export async function insEvent(params: Props) {
   try {
-    const response = await postEventCategories(params);
+    const response = await postEvent(params);
     return response;
   } catch (error) {
     console.error('Error in insEvent:', error);

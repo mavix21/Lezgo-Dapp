@@ -14,7 +14,7 @@ interface Props {
   createdAt: Date;
 }
 
-export async function postEventCategories({
+export async function postEvent({
   userId,
   eventCategoryId,
   name,
@@ -24,7 +24,7 @@ export async function postEventCategories({
   address,
   createdAt,
 }: Props) {
-  const insEventCategories = await db
+  const insEvent = await db
     .insert(events)
     .values({
       userId: userId,
@@ -37,5 +37,5 @@ export async function postEventCategories({
       createdAt: createdAt,
     })
     .returning({ insertedId: events.id });
-  return insEventCategories;
+  return insEvent;
 }

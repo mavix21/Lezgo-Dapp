@@ -140,7 +140,9 @@ export default function EventCreationForm() {
         address: values.address,
         createdAt: new Date(),
       });
-      console.log(eventId, values);
+      //console.log(eventId, values);
+
+      
 
       toast.success('Event has been created successfully.', {
         icon: <CircleCheck />,
