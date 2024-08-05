@@ -6,6 +6,7 @@ export { default as authenticators } from './authenticators';
 export { default as verificationTokens } from './verification-tokens';
 export { default as sessions } from './sessions';
 export { default as currencies } from './currencies';
+export { default as venues } from './venues';
 export {
   default as eventTickets,
   eventTicketsRelations,

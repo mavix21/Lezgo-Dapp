@@ -1,14 +1,16 @@
 import {
+  bigint,
   integer,
   pgEnum,
   pgTable,
+  smallint,
   text,
   timestamp,
   uuid,
   varchar,
 } from 'drizzle-orm/pg-core';
 import { relations, sql } from 'drizzle-orm';
-import { eventCategories, eventTickets } from '.';
+import { eventCategories, eventTickets, venues } from '.';
 import users from '@/server/db/schema/users';
 
 export const eventModality = pgEnum('event_modality', [
@@ -31,20 +33,21 @@ const events = pgTable('event', {
   id: uuid('id')
     .primaryKey()
     .default(sql`gen_random_uuid()`),
+  name: varchar('name', { length: 200 }).notNull(),
   userId: uuid('user_id')
     .notNull()
-    .references(() => users.id, { onDelete: 'cascade' }),
-  eventCategoryId: integer('event_category_id')
+    .references(() => users.id),
+  eventCategoryId: smallint('event_category_id')
     .notNull()
     .references(() => eventCategories.id),
-  eventModality: eventModality('event_modality').notNull().default('in_person'),
-  eventPlatform: eventPlatform('event_platform'),
+  modality: eventModality('modality').notNull().default('in_person'),
   totalTickets: integer('total_tickets').notNull().default(0),
-  name: varchar('name', { length: 50 }).notNull(),
+  venueId: bigint('venue_id', { mode: 'number' })
+    .notNull()
+    .references(() => venues.id),
   description: text('description').notNull(),
-  startDate: timestamp('start_date').notNull(),
-  endDate: timestamp('end_date').notNull(),
-  address: varchar('address', { length: 255 }),
+  startDate: timestamp('start_date'),
+  endDate: timestamp('end_date'),
   createdAt: timestamp('created_at')
     .notNull()
     .default(sql`now()`),
@@ -61,6 +64,10 @@ export const eventRelations = relations(events, ({ one, many }) => ({
   category: one(eventCategories, {
     fields: [events.eventCategoryId],
     references: [eventCategories.id],
+  }),
+  venue: one(venues, {
+    fields: [events.venueId],
+    references: [venues.id],
   }),
   tickets: many(eventTickets),
 }));

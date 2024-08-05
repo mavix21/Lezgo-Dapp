@@ -50,6 +50,13 @@
       "when": 1722612631129,
       "tag": "0006_melodic_purple_man",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1722834935711,
+      "tag": "0007_high_silhouette",
+      "breakpoints": true
     }
   ]
 }
