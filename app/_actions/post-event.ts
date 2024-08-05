@@ -33,8 +33,8 @@ export async function postEvent({
       description: description,
       startDate: startDate,
       endDate: endDate,
-      address: address,
       createdAt: createdAt,
+      venueId: 0,
     })
     .returning({ insertedId: events.id });
   return insEvent;
