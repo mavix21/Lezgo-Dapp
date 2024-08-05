@@ -4,22 +4,6 @@ import { getEventById } from '../_actions/get-event-by-id';
 
 export function useEventById(eventId: string) {
   const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   async function fetchCategories() {
-  //     try {
-  //       const fetchedCategories = await getEventCategories();
-  //       setCategories(fetchedCategories);
-  //     } catch (error) {
-  //       console.error('Failed to fetch categories:', error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
-
-  //   fetchCategories();
-  // }, []);
-
   const [eventById, setEvent] = useState([] as any);
 
   useEffect(() => {

@@ -31,6 +31,8 @@ import { DataTable } from '@/app/_components/layout/promoter/dashboard/data-tabl
 import { getEventCategories } from '@/app/_actions/get-event-categories';
 import { PieChartDashboard } from './_components/PieChart';
 import { AreaChartDashboard } from './_components/AreaChart';
+import { useEventsByCategory } from '@/app/_hooks/use-events-by-category';
+import { getEventsByCategory } from '@/app/_actions/get-events-by-categories';
 
 export default async function Home() {
   //const data = await getData()
@@ -45,17 +47,20 @@ export default async function Home() {
             <CardHeader>
               <CardTitle>Your Events</CardTitle>
               <CardDescription className="max-w-lg">
-                Introducing Our Dynamic Events Dashboard Management and Insightful Analysis.
+                Introducing Our Dynamic Events Dashboard Management and
+                Insightful Analysis.
               </CardDescription>
             </CardHeader>
             <CardFooter>
               <Button asChild>
-                <Link href={'/promoter/dashboard/create-event'}>Create New Event</Link>
+                <Link href={'/promoter/dashboard/create-event'}>
+                  Create New Event
+                </Link>
               </Button>
             </CardFooter>
           </Card>
           <PieChartDashboard />
-          <div className='space-y-3'>
+          <div className="space-y-3">
             <Card x-chunk="dashboard-05-chunk-1">
               <CardHeader className="pb-2">
                 <CardDescription>This Week</CardDescription>
