@@ -11,7 +11,8 @@ import {
 } from 'drizzle-orm/pg-core';
 import { relations, sql } from 'drizzle-orm';
 import { eventCategories, eventTickets, venues } from '.';
-import users from '@/server/db/schema/users';
+import { users } from '.';
+import { eventDates } from '.';
 
 export const eventModality = pgEnum('event_modality', [
   'online',
@@ -69,5 +70,6 @@ export const eventRelations = relations(events, ({ one, many }) => ({
     fields: [events.venueId],
     references: [venues.id],
   }),
-  tickets: many(eventTickets),
+  tickets: many(eventTickets, { relationName: 'tickets' }),
+  dates: many(eventDates, { relationName: 'dates' }),
 }));

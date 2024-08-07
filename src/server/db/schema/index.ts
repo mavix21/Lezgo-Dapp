@@ -7,6 +7,8 @@ export { default as verificationTokens } from './verification-tokens';
 export { default as sessions } from './sessions';
 export { default as currencies } from './currencies';
 export { default as venues } from './venues';
+export { default as eventDates, eventDateRelations } from './event-dates';
+export { default as eventShowtimes } from './event-showtimes';
 export {
   default as eventTickets,
   eventTicketsRelations,

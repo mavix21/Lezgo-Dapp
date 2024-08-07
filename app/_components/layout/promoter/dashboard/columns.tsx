@@ -17,8 +17,8 @@ import { MoreHorizontal } from 'lucide-react';
 export type Event = {
   id: string;
   name: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: Date | null;
+  endDate: Date | null;
   createdAt: Date;
   category: string;
   //status: "confirmed" | "cancelled"
