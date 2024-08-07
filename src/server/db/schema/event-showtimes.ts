@@ -8,16 +8,16 @@ import {
   timestamp,
   uuid,
 } from 'drizzle-orm/pg-core';
-import { sql } from 'drizzle-orm';
-import { eventDates, events } from '.';
+import { relations, sql } from 'drizzle-orm';
+import { eventDates } from '.';
 
 const eventShowtimes = pgTable(
   'event_showtime',
   {
-    id: integer('id'),
+    id: integer('id').notNull(),
     eventId: uuid('event_id').notNull(),
     eventDateId: integer('event_date_id').notNull(),
-    startTime: time('showtime', { withTimezone: true }).notNull(),
+    startTime: time('start_time', { withTimezone: true }).notNull(),
     endTime: time('end_time', { withTimezone: true }),
     createdAt: timestamp('created_at')
       .notNull()
@@ -43,3 +43,11 @@ const eventShowtimes = pgTable(
 );
 
 export default eventShowtimes;
+
+export const eventShowtimeRelations = relations(eventShowtimes, ({ one }) => ({
+  eventDate: one(eventDates, {
+    fields: [eventShowtimes.eventId, eventShowtimes.eventDateId],
+    references: [eventDates.eventId, eventDates.id],
+    relationName: 'showtimes',
+  }),
+}));

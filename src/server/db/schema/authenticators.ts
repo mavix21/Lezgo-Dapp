@@ -22,12 +22,13 @@ const authenticators = pgTable(
     credentialBackedUp: boolean('credentialBackedUp').notNull(),
     transports: text('transports'),
   },
-  (authenticator) => ({
-    compositePK: primaryKey({
-      columns: [authenticator.userId, authenticator.credentialID],
-      name: 'auth_pk',
-    }),
-  }),
+  // (authenticator) => ({
+  //   compositePK: primaryKey({
+  //     columns: [authenticator.userId, authenticator.credentialID],
+  //     name: 'auth_pk',
+  //   }),
+  // }
+  // ),
 );
 
 export default authenticators;

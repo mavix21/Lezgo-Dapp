@@ -40,6 +40,7 @@ export const eventDateRelations = relations(eventDates, ({ one, many }) => ({
   event: one(events, {
     fields: [eventDates.eventId],
     references: [events.id],
+    relationName: 'dates',
   }),
-  eventShowtimes: many(eventShowtimes),
+  eventShowtimes: many(eventShowtimes, { relationName: 'showtimes' }),
 }));
