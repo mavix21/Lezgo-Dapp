@@ -1,5 +1,5 @@
 import type { IEventsRepository } from '@/application/repositories/events-repository.interface';
-import type { IAuthenticationService } from '@/application/services/authentication-service.interface';
+import type { IAuthenticationService } from '@/contexts/auth/application/services/authentication-service.interface';
 
 export const DI_SYMBOLS = {
   // Services
