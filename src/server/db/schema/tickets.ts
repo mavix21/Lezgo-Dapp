@@ -1,4 +1,5 @@
 import {
+  char,
   foreignKey,
   integer,
   numeric,
@@ -7,7 +8,7 @@ import {
   uuid,
 } from 'drizzle-orm/pg-core';
 import { relations, sql } from 'drizzle-orm';
-import { eventShowtimes } from '.';
+import { currencies, eventShowtimes } from '.';
 import { ticketTypes } from '.';
 
 const tickets = pgTable(
@@ -21,6 +22,9 @@ const tickets = pgTable(
     eventShowtimeId: integer('event_showtime_id').notNull(),
     ticketTypeId: integer('ticket_type_id').notNull(),
     quantity: integer('quantity').notNull(),
+    currencyId: char('currency_id', { length: 3 })
+      .notNull()
+      .references(() => currencies.id),
     quantityAcquired: integer('quantity_acquired').notNull().default(0),
     price: numeric('price', { precision: 7, scale: 2 }),
     sale_starts_at: timestamp('sale_starts_on'),
@@ -57,5 +61,9 @@ export const ticketRelations = relations(tickets, ({ one }) => ({
   tycketType: one(ticketTypes, {
     fields: [tickets.eventId, tickets.ticketTypeId],
     references: [ticketTypes.eventId, ticketTypes.id],
+  }),
+  currency: one(currencies, {
+    fields: [tickets.currencyId],
+    references: [currencies.id],
   }),
 }));

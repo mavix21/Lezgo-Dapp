@@ -15,6 +15,20 @@
       "when": 1723830332971,
       "tag": "0001_brave_wraith",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1723842458391,
+      "tag": "0002_confused_mesmero",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1723842860807,
+      "tag": "0003_tiny_switch",
+      "breakpoints": true
     }
   ]
 }

@@ -10,7 +10,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 import { relations, sql } from 'drizzle-orm';
-import { eventCategories } from '.';
+import { eventCategories, inPersonEventInfo } from '.';
 import { users } from '.';
 import { eventDates } from '.';
 
@@ -18,16 +18,6 @@ export const eventModality = pgEnum('event_modality', [
   'online',
   'in_person',
   'hybrid',
-]);
-
-export const eventPlatform = pgEnum('event_platform', [
-  'zoom',
-  'teams',
-  'meet',
-  'discord',
-  'twitter',
-  'decentraland',
-  'other',
 ]);
 
 const events = pgTable('event', {
@@ -64,4 +54,5 @@ export const eventRelations = relations(events, ({ one, many }) => ({
     references: [eventCategories.id],
   }),
   dates: many(eventDates, { relationName: 'dates' }),
+  inPersonInfo: one(inPersonEventInfo),
 }));

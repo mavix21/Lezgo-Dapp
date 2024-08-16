@@ -18,7 +18,10 @@ export default inPersonEventInfo;
 export const inPersonEventInfoRelations = relations(
   inPersonEventInfo,
   ({ one }) => ({
-    event: one(events),
+    event: one(events, {
+      fields: [inPersonEventInfo.eventId],
+      references: [events.id],
+    }),
     venue: one(venues, {
       fields: [inPersonEventInfo.venueId],
       references: [venues.id],
