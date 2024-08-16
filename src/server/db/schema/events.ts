@@ -10,7 +10,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 import { relations, sql } from 'drizzle-orm';
-import { eventCategories, eventTickets, venues } from '.';
+import { eventCategories } from '.';
 import { users } from '.';
 import { eventDates } from '.';
 
@@ -63,6 +63,5 @@ export const eventRelations = relations(events, ({ one, many }) => ({
     fields: [events.eventCategoryId],
     references: [eventCategories.id],
   }),
-  tickets: many(eventTickets, { relationName: 'tickets' }),
   dates: many(eventDates, { relationName: 'dates' }),
 }));

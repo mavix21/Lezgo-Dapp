@@ -12,7 +12,5 @@ export {
   default as eventShowtimes,
   eventShowtimeRelations,
 } from './event-showtimes';
-export {
-  default as eventTickets,
-  eventTicketsRelations,
-} from './event-tickets';
+export { default as tickets, ticketRelations } from './tickets';
+export { default as ticketTypes, ticketTypesRelations } from './ticket-types';

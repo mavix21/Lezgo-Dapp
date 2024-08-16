@@ -9,7 +9,7 @@ import {
   uuid,
 } from 'drizzle-orm/pg-core';
 import { relations, sql } from 'drizzle-orm';
-import { eventDates } from '.';
+import { eventDates, tickets } from '.';
 
 const eventShowtimes = pgTable(
   'event_showtime',
@@ -44,10 +44,14 @@ const eventShowtimes = pgTable(
 
 export default eventShowtimes;
 
-export const eventShowtimeRelations = relations(eventShowtimes, ({ one }) => ({
-  eventDate: one(eventDates, {
-    fields: [eventShowtimes.eventId, eventShowtimes.eventDateId],
-    references: [eventDates.eventId, eventDates.id],
-    relationName: 'showtimes',
+export const eventShowtimeRelations = relations(
+  eventShowtimes,
+  ({ one, many }) => ({
+    eventDate: one(eventDates, {
+      fields: [eventShowtimes.eventId, eventShowtimes.eventDateId],
+      references: [eventDates.eventId, eventDates.id],
+      relationName: 'showtimes',
+    }),
+    tickets: many(tickets, { relationName: 'ticketsByShowtime' }),
   }),
-}));
+);
