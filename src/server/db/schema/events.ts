@@ -63,10 +63,6 @@ export const eventRelations = relations(events, ({ one, many }) => ({
     fields: [events.eventCategoryId],
     references: [eventCategories.id],
   }),
-  venue: one(venues, {
-    fields: [events.venueId],
-    references: [venues.id],
-  }),
   tickets: many(eventTickets, { relationName: 'tickets' }),
   dates: many(eventDates, { relationName: 'dates' }),
 }));
