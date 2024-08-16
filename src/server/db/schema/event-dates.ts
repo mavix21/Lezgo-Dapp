@@ -13,7 +13,7 @@ import { events, eventShowtimes } from '.';
 const eventDates = pgTable(
   'event_date',
   {
-    id: integer('id'),
+    id: integer('id').notNull(),
     eventId: uuid('event_id')
       .notNull()
       .references(() => events.id),
