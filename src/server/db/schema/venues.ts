@@ -5,6 +5,8 @@ import {
   text,
   varchar,
 } from 'drizzle-orm/pg-core';
+import inPersonEventInfo from './in-person-event-info';
+import { relations } from 'drizzle-orm';
 
 const venues = pgTable('venue', {
   id: bigserial('id', { mode: 'number' }).primaryKey(),
@@ -16,3 +18,7 @@ const venues = pgTable('venue', {
 });
 
 export default venues;
+
+export const venuesRelations = relations(venues, ({ many }) => ({
+  inPersonEventInfo: many(inPersonEventInfo),
+}));
