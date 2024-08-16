@@ -43,9 +43,6 @@ const events = pgTable('event', {
     .references(() => eventCategories.id),
   modality: eventModality('modality').notNull().default('in_person'),
   totalTickets: integer('total_tickets').notNull().default(0),
-  venueId: bigint('venue_id', { mode: 'number' })
-    .notNull()
-    .references(() => venues.id),
   description: text('description').notNull(),
   startDate: timestamp('start_date'),
   endDate: timestamp('end_date'),
