@@ -8,6 +8,13 @@
       "when": 1723049614755,
       "tag": "0000_tiny_warbound",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1723830332971,
+      "tag": "0001_brave_wraith",
+      "breakpoints": true
     }
   ]
 }
